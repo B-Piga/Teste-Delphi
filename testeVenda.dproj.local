@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2022/09/27 12:03:09.000.478,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/09/27 13:33:33.000.709,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/09/27 14:20:45.000.218,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/09/27 14:22:02.000.460,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/09/27 14:24:16.000.018,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/09/27 14:39:18.000.540,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/09/27 14:39:54.000.559,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/09/27 15:00:05.000.620,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/09/27 15:03:39.000.566,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/09/27 15:09:41.000.229,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/09/27 15:12:59.000.132,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/09/27 15:16:26.000.449,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/09/27 16:01:19.000.866,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/09/27 16:22:03.000.533,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/03/17 08:39:11.000.858,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/03/28 15:43:25.000.094,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/05/22 16:23:49.000.767,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/10/11 11:29:17.000.083,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/10/16 08:29:00.000.782,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/11/01 14:53:57.000.086,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/11/03 11:00:11.000.938,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/02/02 14:20:39.000.732,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/02/07 10:55:58.000.441,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/02/23 17:19:53.000.967,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/08/19 14:23:48.000.229,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/09/17 09:33:13.000.760,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/10/23 15:32:46.418,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/10/23 15:32:53.650,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2024/10/23 15:33:16.923,C:\Users\BVX DESENVOLVIMENTO\Documents\GitHub\Teste-Delphi\model\Produto.pas=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2024/10/23 15:33:21.616,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2024/10/23 15:33:29.787,C:\Users\BVX DESENVOLVIMENTO\Documents\GitHub\Teste-Delphi\model\Cliente.pas=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2024/10/23 15:33:32.956,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2024/10/23 15:34:00.344,C:\Users\BVX DESENVOLVIMENTO\Documents\GitHub\Teste-Delphi\model\Venda.pas=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2024/10/23 15:41:35.757,C:\Users\BVX DESENVOLVIMENTO\Documents\GitHub\Teste-Delphi\view\formVenda.pas=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/10/23 15:41:35.757,C:\Users\BVX DESENVOLVIMENTO\Documents\GitHub\Teste-Delphi\view\formVenda.dfm=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2024/10/23 15:41:59.291,=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/10/23 15:42:20.027,C:\Users\BVX DESENVOLVIMENTO\Documents\GitHub\Teste-Delphi\controller\vendaController.pas=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/10/23 17:00:53.430,C:\Users\BVX DESENVOLVIMENTO\Documents\GitHub\Teste-Delphi\testeVenda.dproj=C:\Users\BVX DESENVOLVIMENTO\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
