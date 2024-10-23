@@ -12,30 +12,50 @@ object vendaForm: TvendaForm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  WindowState = wsMaximized
   PixelsPerInch = 96
   TextHeight = 13
   object pnlToolBar: TPanel
     Left = 0
     Top = 0
     Width = 757
-    Height = 41
+    Height = 49
     Align = alTop
     BevelOuter = bvNone
+    Color = 2697513
+    ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = 288
-    ExplicitTop = 224
-    ExplicitWidth = 185
+    object pnlSair: TPanel
+      AlignWithMargins = True
+      Left = 720
+      Top = 3
+      Width = 34
+      Height = 43
+      Align = alRight
+      BevelOuter = bvNone
+      Caption = 'X'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Segoe UI Semibold'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      OnClick = pnlSairClick
+      ExplicitHeight = 35
+    end
   end
   object pnlPrincipal: TPanel
     AlignWithMargins = True
     Left = 3
-    Top = 44
+    Top = 52
     Width = 751
-    Height = 435
+    Height = 427
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
     ExplicitLeft = -2
-    ExplicitTop = 47
+    ExplicitTop = 44
+    ExplicitHeight = 435
   end
 end
