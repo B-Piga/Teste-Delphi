@@ -19,43 +19,56 @@ object vendaForm: TvendaForm
     Left = 0
     Top = 0
     Width = 757
-    Height = 49
+    Height = 41
     Align = alTop
     BevelOuter = bvNone
     Color = 2697513
     ParentBackground = False
     TabOrder = 0
-    object pnlSair: TPanel
-      AlignWithMargins = True
-      Left = 720
-      Top = 3
-      Width = 34
-      Height = 43
+    ExplicitTop = -3
+    object pnlSairFundo: TPanel
+      Left = 572
+      Top = 0
+      Width = 185
+      Height = 41
       Align = alRight
       BevelOuter = bvNone
-      Caption = 'X'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -16
-      Font.Name = 'Segoe UI Semibold'
-      Font.Style = []
-      ParentFont = False
       TabOrder = 0
-      OnClick = pnlSairClick
-      ExplicitHeight = 35
+      ExplicitLeft = 288
+      object pnlSair: TPanel
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 179
+        Height = 35
+        Align = alClient
+        BevelOuter = bvNone
+        Caption = 'X'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGray
+        Font.Height = -16
+        Font.Name = 'Segoe UI Semibold'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnClick = pnlSairClick
+        ExplicitLeft = 8
+        ExplicitTop = 0
+        ExplicitWidth = 185
+        ExplicitHeight = 41
+      end
     end
   end
   object pnlPrincipal: TPanel
     AlignWithMargins = True
     Left = 3
-    Top = 52
+    Top = 44
     Width = 751
-    Height = 427
+    Height = 435
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
     ExplicitLeft = -2
-    ExplicitTop = 44
-    ExplicitHeight = 435
+    ExplicitTop = 47
   end
 end
