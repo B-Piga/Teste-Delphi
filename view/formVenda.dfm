@@ -107,10 +107,10 @@ object vendaForm: TvendaForm
       object Label4: TLabel
         Left = 49
         Top = 0
-        Width = 192
+        Width = 200
         Height = 49
         Align = alLeft
-        Caption = 'SISTEMA DE VENDAS WK TECNOLOGY'
+        Caption = 'SISTEMA DE VENDAS WK TECHNOLOGY'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
         Font.Height = -11
@@ -132,6 +132,411 @@ object vendaForm: TvendaForm
     BevelOuter = bvNone
     TabOrder = 1
     ExplicitHeight = 378
+    object pnlMenu: TPanel
+      Left = 0
+      Top = 0
+      Width = 60
+      Height = 296
+      Margins.Left = 10
+      Align = alLeft
+      BevelOuter = bvNone
+      Color = 8282113
+      ParentBackground = False
+      TabOrder = 0
+      OnMouseEnter = pnlMenuMouseEnter
+      OnMouseLeave = pnlMenuMouseLeave
+      ExplicitHeight = 337
+      object Panel7: TPanel
+        AlignWithMargins = True
+        Left = 3
+        Top = 62
+        Width = 54
+        Height = 53
+        Align = alTop
+        BevelOuter = bvNone
+        TabOrder = 0
+        OnMouseEnter = pnlMenuMouseEnter
+        OnMouseLeave = pnlMenuMouseLeave
+        ExplicitLeft = 4
+        ExplicitTop = 4
+        ExplicitWidth = 177
+        object Image1: TImage
+          Left = 0
+          Top = 0
+          Width = 51
+          Height = 53
+          Align = alLeft
+          Center = True
+          Picture.Data = {
+            0954506E67496D61676589504E470D0A1A0A0000000D49484452000000200000
+            00200806000000737A7AF40000000473424954080808087C0864880000000970
+            485973000000EC000000EC01792871BD0000001974455874536F667477617265
+            007777772E696E6B73636170652E6F72679BEE3C1A000003424944415478DAD5
+            97676C4E5118C79F2255416354881D2BB62082D87B34081AE3036A8518313E58
+            E58319E3835A8910245AA156428C102346F0C14EAC442945CC6A8959D4FF9FF3
+            34EFEDCD7B9A7BB48DF4497EB927F79CF79EFF7DD6B96F84FC678B282E02B86E
+            1B681D70FD5530B3300554016F1D5FAE1CF8525802AA82D73A5E08322CEBAA81
+            A53A8E069F8B42401DF0DCB2AE3178F0AF026A817EA0846E52DB331705E2747C
+            0BFCB43C8FEB5AE93805647BE6D2403AF80D4E82577E016740AF801E29A81D05
+            43FC022682A97AAF8D5E7FA8625AA47A2788FDF178A92428ADCFB9AD731BC01E
+            BF00AFD15D0CC348B0BF806F1B0F7681FBA0997FD2268075DC01CC01890514B0
+            08AC046741EFA0020E8161602D98AF6EBCACD74E62922B5285324C9DD5B565C0
+            353165DA439FB509CC0049606C50019BC174CF8FCA834F3AD7043C1413A234BD
+            C73265A362EEDC003962E29E1DE665020948002B7C6EFBAA6FD81D5CB0081808
+            8E830F2046E7AE808EB670DA048C073B256FE23C0575259498E10484FB5D9AE4
+            93D03601FDC5348B4C5051EF31B6EDC12CB0D122806D7A15380F7AEAF3E93936
+            A8AEE05250012DC11D1D97D5871C01837583048B804415B80F8C0695C17B5DD3
+            00A40615E03DFDEA8327628EE3C96007986411B0178C52218C790B7057D7843D
+            1D6D0278FFBB9852EB22A604978125E018186411704E4CF93114AB415F700A64
+            810AB68D6CF64CCC8134021C1053962CCFEBA09D4500938F653A414CF78BD72B
+            4FC8A6AE0272936EB698DE1DA742D2555838012CBF4A20169C905017A467C21E
+            74F909380C868235608186E2A29843264A457805646AD8F8CCB6E0A684BA6032
+            18E32A600B9806768371A01178A4737CCB689F8048F50EAD2678090E82E1601D
+            98E72A6031582EE63BA18F6E98A5738CF3379F007ED0303F72D443F4546E179C
+            0BD6BB0A6022B1E4EE81E67AEF8D9812A537186F7EA6F19C67DB65B9B2E4D831
+            EBE9FADCEEC9D24C711530404C227D54978B6E1CA36F46E3E1F34B42B5CE3CE1
+            A756AAE4ED82DDC4E48F93006F376447CB1037AB015EE8B82178EC2AA0147827
+            A681B08C4E3B0A88558F304CD5C5E4869300DA14B0D57163AF71537E4F24DB16
+            04F95FC093315E4C62B97C94D2E5DBC59C8C562B367F4E8BCCFE020B1CCD2175
+            3597E90000000049454E44AE426082}
+          OnMouseEnter = pnlMenuMouseEnter
+          OnMouseLeave = pnlMenuMouseLeave
+          ExplicitLeft = 1
+          ExplicitTop = 1
+          ExplicitHeight = 51
+        end
+        object Label5: TLabel
+          AlignWithMargins = True
+          Left = 61
+          Top = 3
+          Width = -10
+          Height = 47
+          Margins.Left = 10
+          Align = alClient
+          Caption = '[F2] Excluir Venda'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Segoe UI Semibold'
+          Font.Style = []
+          ParentFont = False
+          Layout = tlCenter
+          OnMouseEnter = pnlMenuMouseEnter
+          OnMouseLeave = pnlMenuMouseLeave
+          ExplicitWidth = 106
+          ExplicitHeight = 17
+        end
+      end
+      object Panel8: TPanel
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 54
+        Height = 53
+        Align = alTop
+        BevelOuter = bvNone
+        TabOrder = 1
+        OnMouseEnter = pnlMenuMouseEnter
+        OnMouseLeave = pnlMenuMouseLeave
+        ExplicitLeft = 4
+        ExplicitTop = 4
+        ExplicitWidth = 177
+        object Image3: TImage
+          Left = 0
+          Top = 0
+          Width = 51
+          Height = 53
+          Align = alLeft
+          Center = True
+          Picture.Data = {
+            0954506E67496D61676589504E470D0A1A0A0000000D49484452000000200000
+            00200806000000737A7AF40000000473424954080808087C0864880000000970
+            48597300000EA600000EA60187DCA96F0000001974455874536F667477617265
+            007777772E696E6B73636170652E6F72679BEE3C1A000003094944415478DABD
+            966B68CE511CC7CFBFB9EC8517446B25A490176C2EDB30532E2F46B9959229B1
+            ADBC504A24A62CB54D28097921B2AC5C5FB8A4C46CA40CB50B2DAF485E2C917B
+            E4125BF3F9F5FF3D39D6F33FCFD97FCFB353DF7ECFEF3CBFF33B9F73FEE716F4
+            F6F69AA81204C170CC2C34D3B253D04BD4819EA86D27CF2F13A304C900E87808
+            A60255A3B11E79DEA21A748A7C7F060440E7E33057D1EC1803EA44ABC9F92A16
+            009D17616EA01C2BA61BB5A0A7AA1768129A81F251091A6AC57F442BC9FBB05F
+            003AF2B63E9DCB88CA89E9884C100479987A13AE9144798DA6D3EEB317807EF3
+            C7D6B4F7A0FDA896FF7FA74C12B6AF427BADD9B840DBF5BE009BF97DD2AAAFA1
+            BEDA670AFB80ECC1D4595565E4B9E86C8364ABC9B64AAC7699F6429F9147CCC4
+            2354A0551F502EB97A5C00F35062C1C8829BE3FAE61E10D330ED6898561591AF
+            D505B0059D50FF3EC10BE3766E41DCC294AABB9B9C075D00A751A5FA4709DE96
+            068003985DEADE26E75217804C57620B55105C9F068032CC79753F9173B40BE0
+            1B1AA17E09C12D690090EDDCA66E1739C7BB00E474CB577F23C10D6900588BB9
+            A46E0739238F75013883CAD53F42F0F63400C82156A56E23394B2363D156744C
+            FD7B042F4E03C04DCC3275CF9273930B603E7AA0BE5CA50534E81C40E7534DF8
+            4EC8D6AA25E4BBEB029040B93E73B54E0E21398CBA63749EA58399AB55ADE429
+            72B6D1BBC03E8CA454535F13036027E69055B5863C577C00E406936D93A7F5F2
+            29F649329F99D091CBE2AD35FF8EE02F6802EDBFA604D0241365CA907D680894
+            BC079E393A976F5E6F4DBB5DDEA10DB46F4C09A0C98A3197CDFFEF40B9159B4D
+            B83644CFD164139E9E22D935D926BAC86375551444B237E12813AE87B254539F
+            A4C8B48FEC0F4410F52C07641DE6381AE3D1B17C3AB9809A4CF866CC49122310
+            F256BCE305A01059D6342F4285E83B7A6FC2C7C61BD460EF73DAC8A977DD840F
+            9DBEE5A742347901C42D40C8F57BCD01B1827E9B3306E009B15C662E63001E10
+            3F507146013C20CE651C200544D7A0003820EA060D4021644BEF400B90BCBC0E
+            FF053C8557292CE2EDDB0000000049454E44AE426082}
+          OnMouseEnter = pnlMenuMouseEnter
+          OnMouseLeave = pnlMenuMouseLeave
+          ExplicitLeft = 1
+          ExplicitTop = 1
+          ExplicitHeight = 51
+        end
+        object Label6: TLabel
+          AlignWithMargins = True
+          Left = 61
+          Top = 3
+          Width = -10
+          Height = 47
+          Margins.Left = 10
+          Align = alClient
+          Caption = '[F1] Pesquisar'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Segoe UI Semibold'
+          Font.Style = []
+          ParentFont = False
+          Layout = tlCenter
+          OnMouseEnter = pnlMenuMouseEnter
+          OnMouseLeave = pnlMenuMouseLeave
+          ExplicitWidth = 82
+          ExplicitHeight = 17
+        end
+      end
+    end
+    object pnlTotal: TPanel
+      Left = 0
+      Top = 296
+      Width = 751
+      Height = 41
+      Align = alBottom
+      BevelOuter = bvNone
+      Color = 8282113
+      ParentBackground = False
+      TabOrder = 1
+      ExplicitLeft = -3
+      ExplicitTop = 229
+    end
+    object pnlFundo: TPanel
+      Left = 60
+      Top = 0
+      Width = 691
+      Height = 296
+      Align = alClient
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 2
+      ExplicitLeft = 280
+      ExplicitTop = 152
+      ExplicitWidth = 185
+      ExplicitHeight = 41
+      object pnlQuant: TPanel
+        Left = 0
+        Top = 273
+        Width = 691
+        Height = 23
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = clSilver
+        ParentBackground = False
+        TabOrder = 0
+        ExplicitLeft = 1
+        ExplicitTop = 272
+        ExplicitWidth = 689
+      end
+      object pnlAddItens: TPanel
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 685
+        Height = 86
+        Align = alTop
+        BevelOuter = bvNone
+        Color = clWhite
+        TabOrder = 1
+        object pnlTitulo: TPanel
+          Left = 0
+          Top = 0
+          Width = 685
+          Height = 27
+          Align = alTop
+          TabOrder = 0
+          object lblCod: TLabel
+            AlignWithMargins = True
+            Left = 4
+            Top = 4
+            Width = 69
+            Height = 19
+            Align = alLeft
+            Alignment = taCenter
+            Caption = 'C'#211'DIGO'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Segoe UI Semibold'
+            Font.Style = []
+            ParentFont = False
+          end
+          object lblNome: TLabel
+            AlignWithMargins = True
+            Left = 79
+            Top = 4
+            Width = 362
+            Height = 19
+            Align = alLeft
+            Alignment = taCenter
+            Caption = 'NOME'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Segoe UI Semibold'
+            Font.Style = []
+            ParentFont = False
+          end
+          object lblQuant: TLabel
+            AlignWithMargins = True
+            Left = 447
+            Top = 4
+            Width = 47
+            Height = 19
+            Align = alLeft
+            Alignment = taCenter
+            Caption = 'QUANT.'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Segoe UI Semibold'
+            Font.Style = []
+            ParentFont = False
+            ExplicitLeft = 105
+            ExplicitHeight = 17
+          end
+          object lblValor: TLabel
+            AlignWithMargins = True
+            Left = 500
+            Top = 4
+            Width = 76
+            Height = 19
+            Align = alLeft
+            Alignment = taCenter
+            Caption = 'VALOR UNIT.'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Segoe UI Semibold'
+            Font.Style = []
+            ParentFont = False
+            ExplicitLeft = 158
+            ExplicitHeight = 17
+          end
+        end
+        object pnlEdit: TPanel
+          Left = 0
+          Top = 27
+          Width = 685
+          Height = 59
+          Align = alClient
+          TabOrder = 1
+          ExplicitLeft = 248
+          ExplicitTop = 8
+          ExplicitWidth = 185
+          ExplicitHeight = 41
+          object Image4: TImage
+            Left = 597
+            Top = 1
+            Width = 87
+            Height = 57
+            Align = alRight
+          end
+          object editCodigo: TEdit
+            AlignWithMargins = True
+            Left = 4
+            Top = 4
+            Width = 69
+            Height = 51
+            Align = alLeft
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'Segoe UI Semibold'
+            Font.Style = []
+            NumbersOnly = True
+            ParentFont = False
+            TabOrder = 0
+          end
+          object editNome: TEdit
+            AlignWithMargins = True
+            Left = 79
+            Top = 4
+            Width = 362
+            Height = 51
+            Align = alLeft
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'Segoe UI Semibold'
+            Font.Style = []
+            NumbersOnly = True
+            ParentFont = False
+            TabOrder = 1
+          end
+          object editQuant: TEdit
+            AlignWithMargins = True
+            Left = 447
+            Top = 4
+            Width = 69
+            Height = 51
+            Align = alLeft
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'Segoe UI Semibold'
+            Font.Style = []
+            NumbersOnly = True
+            ParentFont = False
+            TabOrder = 2
+            ExplicitLeft = 564
+            ExplicitTop = 6
+          end
+          object editValor: TEdit
+            AlignWithMargins = True
+            Left = 522
+            Top = 4
+            Width = 69
+            Height = 51
+            Align = alLeft
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'Segoe UI Semibold'
+            Font.Style = []
+            NumbersOnly = True
+            ParentFont = False
+            TabOrder = 3
+            ExplicitLeft = 612
+            ExplicitTop = -4
+          end
+        end
+      end
+      object pnlItens: TPanel
+        AlignWithMargins = True
+        Left = 3
+        Top = 95
+        Width = 685
+        Height = 175
+        Align = alClient
+        BevelOuter = bvNone
+        TabOrder = 2
+        ExplicitLeft = 256
+        ExplicitTop = 128
+        ExplicitWidth = 185
+        ExplicitHeight = 41
+      end
+    end
   end
   object pnlFooter: TPanel
     Left = 0
@@ -144,7 +549,7 @@ object vendaForm: TvendaForm
     Color = 2697513
     ParentBackground = False
     TabOrder = 2
-    object Panel1: TPanel
+    object pnlFinaliza: TPanel
       AlignWithMargins = True
       Left = 569
       Top = 10
@@ -183,7 +588,7 @@ object vendaForm: TvendaForm
         ExplicitWidth = 22
       end
     end
-    object Panel2: TPanel
+    object pnlCancela: TPanel
       AlignWithMargins = True
       Left = 378
       Top = 10
