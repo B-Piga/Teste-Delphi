@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.Imaging.pngimage, Data.DB, Vcl.Grids, Vcl.DBGrids;
+  Vcl.Imaging.pngimage, Data.DB, Vcl.Grids, Vcl.DBGrids, Datasnap.DBClient;
 
 type
   TvendaForm = class(TForm)
@@ -49,8 +49,12 @@ type
     editValor: TEdit;
     Image4: TImage;
     lblTotal: TLabel;
-    Label8: TLabel;
+    lblVlrTotal: TLabel;
     DBGrid1: TDBGrid;
+    cdsItens: TClientDataSet;
+    dsItens: TDataSource;
+    Label7: TLabel;
+    Label8: TLabel;
     procedure pnlSairClick(Sender: TObject);
     procedure pnlSairMouseEnter(Sender: TObject);
     procedure pnlSairMouseLeave(Sender: TObject);
@@ -58,8 +62,14 @@ type
     procedure FormResize(Sender: TObject);
     procedure pnlFundoMouseEnter(Sender: TObject);
     procedure pnlMenuResize(Sender: TObject);
+    procedure Image4Click(Sender: TObject);
+    procedure editQuantKeyPress(Sender: TObject; var Key: Char);
+    procedure pnlCancelaClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
+    procedure iniciaDataSet;
+    procedure iniciaForm;
   public
     { Public declarations }
   end;
@@ -71,6 +81,22 @@ implementation
 
 {$R *.dfm}
 
+procedure TvendaForm.editQuantKeyPress(Sender: TObject; var Key: Char);
+begin
+  // Verifica se a tecla pressionada é um número, vírgula, ponto ou a tecla de backspace (para apagar)
+  if not (Key in ['0'..'9', ',', '.', #8]) then
+    Key := #0  // Se não for permitido, cancela o caractere
+  else
+  begin
+    // Evita a inserção de múltiplas vírgulas ou pontos
+    if (Key = ',') and (Pos(',', TEdit(Sender).Text) > 0) then
+      Key := #0;
+
+    if (Key = '.') and (Pos('.', TEdit(Sender).Text) > 0) then
+      Key := #0;
+  end;
+end;
+
 procedure TvendaForm.FormResize(Sender: TObject);
 begin
   editCodigo.Width := 69;
@@ -81,6 +107,55 @@ begin
   lblNome.Width    := (pnlEdit.Width - (69*3) - 110);
   lblQuant.Width   := 69;
   lblValor.Width   := 69;
+end;
+
+procedure TvendaForm.FormShow(Sender: TObject);
+begin
+  iniciaForm;
+end;
+
+procedure TvendaForm.Image4Click(Sender: TObject);
+begin
+  with cdsItens, FieldDefs do
+  begin
+    Append;
+    FieldByName('CODIGO').AsInteger     := StrToInt(editCodigo.Text);
+    FieldByName('NOME').AsString        := editNome.Text;
+    FieldByName('QUANTIDADE').AsFloat   := StrToFloat(editQuant.Text);
+    FieldByName('VLR_UNIT').AsCurrency  := StrToFloat(editValor.Text);
+    FieldByName('VLR_TOTAL').AsCurrency := StrToFloat(editValor.Text) * StrToFloat(editQuant.Text);
+    Post;
+  end;
+end;
+
+procedure TvendaForm.iniciaDataSet;
+begin
+  with cdsItens, FieldDefs do
+  begin
+    Clear;
+    Add('CODIGO', ftInteger);
+    Add('NOME', ftString, 100);
+    Add('QUANTIDADE', ftFloat);
+    Add('VLR_UNIT', ftCurrency);
+    Add('VLR_TOTAL', ftCurrency);
+    if not Active then    
+    CreateDataSet;
+  end;
+end;
+
+procedure TvendaForm.iniciaForm;
+begin
+  editCodigo.Text := '';
+  editNome.Text   := 'Pressione ENTER para pesquisar';
+  editQuant.Text  := '';
+  editValor.Text  := '';
+  lblVlrTotal.Caption := 'R$ 0,00';
+  lblCliente.Caption  := 'CONSUMIDOR';
+end;
+
+procedure TvendaForm.pnlCancelaClick(Sender: TObject);
+begin
+  iniciaForm;
 end;
 
 procedure TvendaForm.pnlFundoMouseEnter(Sender: TObject);

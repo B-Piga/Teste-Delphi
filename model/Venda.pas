@@ -21,6 +21,7 @@ type
     property Numero: Integer read FNumero write FNumero;
     property Data: TDateTime read FData write FData;
     property Total: Currency read FTotal;
+    property Produtos: TList<TProduto> read FProdutos write FProdutos;
   end;
 
 implementation

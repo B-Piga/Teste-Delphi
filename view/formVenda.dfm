@@ -14,6 +14,7 @@ object vendaForm: TvendaForm
   OldCreateOrder = False
   WindowState = wsMaximized
   OnResize = FormResize
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnlToolBar: TPanel
@@ -132,7 +133,6 @@ object vendaForm: TvendaForm
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitHeight = 378
     object pnlMenu: TPanel
       Left = 0
       Top = 0
@@ -146,7 +146,6 @@ object vendaForm: TvendaForm
       TabOrder = 0
       OnMouseEnter = pnlMenuMouseEnter
       OnResize = pnlMenuResize
-      ExplicitHeight = 337
       object Panel7: TPanel
         AlignWithMargins = True
         Left = 3
@@ -157,9 +156,6 @@ object vendaForm: TvendaForm
         BevelOuter = bvNone
         TabOrder = 0
         OnMouseEnter = pnlMenuMouseEnter
-        ExplicitLeft = 4
-        ExplicitTop = 4
-        ExplicitWidth = 177
         object imgDeletarVenda: TImage
           Left = 0
           Top = 0
@@ -235,9 +231,6 @@ object vendaForm: TvendaForm
         BevelOuter = bvNone
         TabOrder = 1
         OnMouseEnter = pnlMenuMouseEnter
-        ExplicitLeft = 4
-        ExplicitTop = 4
-        ExplicitWidth = 177
         object imgPesquisa: TImage
           Left = 0
           Top = 0
@@ -330,7 +323,7 @@ object vendaForm: TvendaForm
         Layout = tlCenter
         ExplicitHeight = 37
       end
-      object Label8: TLabel
+      object lblVlrTotal: TLabel
         AlignWithMargins = True
         Left = 650
         Top = 3
@@ -359,10 +352,6 @@ object vendaForm: TvendaForm
       ParentBackground = False
       TabOrder = 2
       OnMouseEnter = pnlFundoMouseEnter
-      ExplicitLeft = 280
-      ExplicitTop = 152
-      ExplicitWidth = 185
-      ExplicitHeight = 41
       object pnlQuant: TPanel
         Left = 0
         Top = 265
@@ -373,9 +362,39 @@ object vendaForm: TvendaForm
         Color = clSilver
         ParentBackground = False
         TabOrder = 0
-        ExplicitLeft = 1
-        ExplicitTop = 272
-        ExplicitWidth = 689
+        object Label7: TLabel
+          Left = 0
+          Top = 0
+          Width = 33
+          Height = 23
+          Align = alLeft
+          Caption = 'Label7'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Segoe UI Semibold'
+          Font.Style = []
+          ParentFont = False
+          Layout = tlCenter
+          ExplicitHeight = 13
+        end
+        object Label8: TLabel
+          Left = 658
+          Top = 0
+          Width = 33
+          Height = 23
+          Align = alRight
+          Caption = 'Label7'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Segoe UI Semibold'
+          Font.Style = []
+          ParentFont = False
+          Layout = tlCenter
+          ExplicitLeft = 0
+          ExplicitHeight = 13
+        end
       end
       object pnlAddItens: TPanel
         AlignWithMargins = True
@@ -398,7 +417,7 @@ object vendaForm: TvendaForm
             AlignWithMargins = True
             Left = 4
             Top = 4
-            Width = 69
+            Width = 50
             Height = 19
             Align = alLeft
             Alignment = taCenter
@@ -409,12 +428,13 @@ object vendaForm: TvendaForm
             Font.Name = 'Segoe UI Semibold'
             Font.Style = []
             ParentFont = False
+            ExplicitHeight = 17
           end
           object lblNome: TLabel
             AlignWithMargins = True
-            Left = 79
+            Left = 60
             Top = 4
-            Width = 362
+            Width = 39
             Height = 19
             Align = alLeft
             Alignment = taCenter
@@ -425,12 +445,14 @@ object vendaForm: TvendaForm
             Font.Name = 'Segoe UI Semibold'
             Font.Style = []
             ParentFont = False
+            ExplicitLeft = 79
+            ExplicitHeight = 17
           end
           object lblQuant: TLabel
             AlignWithMargins = True
-            Left = 447
+            Left = 105
             Top = 4
-            Width = 69
+            Width = 47
             Height = 19
             Align = alLeft
             Alignment = taCenter
@@ -441,10 +463,12 @@ object vendaForm: TvendaForm
             Font.Name = 'Segoe UI Semibold'
             Font.Style = []
             ParentFont = False
+            ExplicitLeft = 447
+            ExplicitHeight = 17
           end
           object lblValor: TLabel
             AlignWithMargins = True
-            Left = 522
+            Left = 158
             Top = 4
             Width = 58
             Height = 19
@@ -457,6 +481,7 @@ object vendaForm: TvendaForm
             Font.Name = 'Segoe UI Semibold'
             Font.Style = []
             ParentFont = False
+            ExplicitLeft = 522
             ExplicitHeight = 17
           end
         end
@@ -467,10 +492,6 @@ object vendaForm: TvendaForm
           Height = 67
           Align = alClient
           TabOrder = 1
-          ExplicitLeft = 248
-          ExplicitTop = 8
-          ExplicitWidth = 185
-          ExplicitHeight = 41
           object Image4: TImage
             Left = 597
             Top = 1
@@ -549,6 +570,7 @@ object vendaForm: TvendaForm
               A7745B550F8DBB3EDF617071604205C650A0ECA3EA913881E050215D3E9FA7F5
               F81B8E695A4E803B21525ADA8792A2F3C916BF03017DC1DFC2CEF6890CA484C6
               0000000049454E44AE426082}
+            OnClick = Image4Click
             ExplicitHeight = 57
           end
           object editCodigo: TEdit
@@ -567,7 +589,8 @@ object vendaForm: TvendaForm
             NumbersOnly = True
             ParentFont = False
             TabOrder = 0
-            ExplicitHeight = 51
+            Text = 'Pressione ENTER para pesquisar'
+            ExplicitHeight = 29
           end
           object editNome: TEdit
             AlignWithMargins = True
@@ -576,15 +599,16 @@ object vendaForm: TvendaForm
             Width = 362
             Height = 59
             Align = alLeft
+            Alignment = taCenter
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -16
             Font.Name = 'Segoe UI Semibold'
             Font.Style = []
-            NumbersOnly = True
             ParentFont = False
             TabOrder = 1
-            ExplicitHeight = 51
+            Text = 'Pressione ENTER para pesquisar'
+            ExplicitHeight = 29
           end
           object editQuant: TEdit
             AlignWithMargins = True
@@ -598,12 +622,10 @@ object vendaForm: TvendaForm
             Font.Height = -16
             Font.Name = 'Segoe UI Semibold'
             Font.Style = []
-            NumbersOnly = True
             ParentFont = False
             TabOrder = 2
-            ExplicitLeft = 564
-            ExplicitTop = 6
-            ExplicitHeight = 51
+            OnKeyPress = editQuantKeyPress
+            ExplicitHeight = 29
           end
           object editValor: TEdit
             AlignWithMargins = True
@@ -617,12 +639,9 @@ object vendaForm: TvendaForm
             Font.Height = -16
             Font.Name = 'Segoe UI Semibold'
             Font.Style = []
-            NumbersOnly = True
             ParentFont = False
             TabOrder = 3
-            ExplicitLeft = 612
-            ExplicitTop = -4
-            ExplicitHeight = 51
+            ExplicitHeight = 29
           end
         end
       end
@@ -635,10 +654,6 @@ object vendaForm: TvendaForm
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 2
-        ExplicitLeft = 256
-        ExplicitTop = 128
-        ExplicitWidth = 185
-        ExplicitHeight = 41
         object DBGrid1: TDBGrid
           AlignWithMargins = True
           Left = 3
@@ -646,6 +661,7 @@ object vendaForm: TvendaForm
           Width = 679
           Height = 153
           Align = alClient
+          DataSource = dsItens
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
@@ -687,9 +703,6 @@ object vendaForm: TvendaForm
       ParentBackground = False
       ParentFont = False
       TabOrder = 0
-      ExplicitLeft = 288
-      ExplicitTop = 24
-      ExplicitHeight = 41
       object Label1: TLabel
         Left = 0
         Top = 0
@@ -726,9 +739,7 @@ object vendaForm: TvendaForm
       ParentBackground = False
       ParentFont = False
       TabOrder = 1
-      ExplicitLeft = 288
-      ExplicitTop = 24
-      ExplicitHeight = 41
+      OnClick = pnlCancelaClick
       object Label2: TLabel
         Left = 0
         Top = 0
@@ -839,10 +850,6 @@ object vendaForm: TvendaForm
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitLeft = 72
-        ExplicitTop = 24
-        ExplicitWidth = 185
-        ExplicitHeight = 41
         object Label3: TLabel
           AlignWithMargins = True
           Left = 3
@@ -857,8 +864,7 @@ object vendaForm: TvendaForm
           Font.Name = 'Segoe UI Semibold'
           Font.Style = []
           ParentFont = False
-          ExplicitLeft = 6
-          ExplicitWidth = 162
+          ExplicitWidth = 82
         end
         object lblCliente: TLabel
           AlignWithMargins = True
@@ -879,5 +885,16 @@ object vendaForm: TvendaForm
         end
       end
     end
+  end
+  object cdsItens: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 16
+    Top = 192
+  end
+  object dsItens: TDataSource
+    DataSet = cdsItens
+    Left = 16
+    Top = 240
   end
 end
