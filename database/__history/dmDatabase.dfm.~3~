@@ -1,0 +1,10 @@
+object Dm: TDm
+  OldCreateOrder = False
+  Height = 367
+  Width = 564
+  object FDC_MySQL: TFDConnection
+    LoginPrompt = False
+    Left = 16
+    Top = 8
+  end
+end

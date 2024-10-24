@@ -13,6 +13,7 @@ object vendaForm: TvendaForm
   Font.Style = []
   OldCreateOrder = False
   WindowState = wsMaximized
+  OnResize = FormResize
   PixelsPerInch = 96
   TextHeight = 13
   object pnlToolBar: TPanel
@@ -136,7 +137,7 @@ object vendaForm: TvendaForm
       Left = 0
       Top = 0
       Width = 60
-      Height = 296
+      Height = 288
       Margins.Left = 10
       Align = alLeft
       BevelOuter = bvNone
@@ -160,7 +161,7 @@ object vendaForm: TvendaForm
         ExplicitLeft = 4
         ExplicitTop = 4
         ExplicitWidth = 177
-        object Image1: TImage
+        object imgDeletarVenda: TImage
           Left = 0
           Top = 0
           Width = 51
@@ -241,7 +242,7 @@ object vendaForm: TvendaForm
         ExplicitLeft = 4
         ExplicitTop = 4
         ExplicitWidth = 177
-        object Image3: TImage
+        object imgPesquisa: TImage
           Left = 0
           Top = 0
           Width = 51
@@ -309,22 +310,55 @@ object vendaForm: TvendaForm
     end
     object pnlTotal: TPanel
       Left = 0
-      Top = 296
+      Top = 288
       Width = 751
-      Height = 41
+      Height = 49
       Align = alBottom
       BevelOuter = bvNone
       Color = 8282113
       ParentBackground = False
       TabOrder = 1
-      ExplicitLeft = -3
-      ExplicitTop = 229
+      object lblTotal: TLabel
+        AlignWithMargins = True
+        Left = 60
+        Top = 3
+        Width = 77
+        Height = 43
+        Margins.Left = 60
+        Align = alLeft
+        Caption = 'TOTAL'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -27
+        Font.Name = 'Segoe UI Semibold'
+        Font.Style = []
+        ParentFont = False
+        Layout = tlCenter
+        ExplicitHeight = 37
+      end
+      object Label8: TLabel
+        AlignWithMargins = True
+        Left = 650
+        Top = 3
+        Width = 98
+        Height = 43
+        Align = alRight
+        Caption = 'R$: 0,00'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -27
+        Font.Name = 'Segoe UI Semibold'
+        Font.Style = []
+        ParentFont = False
+        Layout = tlCenter
+        ExplicitHeight = 37
+      end
     end
     object pnlFundo: TPanel
       Left = 60
       Top = 0
       Width = 691
-      Height = 296
+      Height = 288
       Align = alClient
       BevelOuter = bvNone
       Color = clWhite
@@ -336,7 +370,7 @@ object vendaForm: TvendaForm
       ExplicitHeight = 41
       object pnlQuant: TPanel
         Left = 0
-        Top = 273
+        Top = 265
         Width = 691
         Height = 23
         Align = alBottom
@@ -353,7 +387,7 @@ object vendaForm: TvendaForm
         Left = 3
         Top = 3
         Width = 685
-        Height = 86
+        Height = 94
         Align = alTop
         BevelOuter = bvNone
         Color = clWhite
@@ -401,7 +435,7 @@ object vendaForm: TvendaForm
             AlignWithMargins = True
             Left = 447
             Top = 4
-            Width = 47
+            Width = 69
             Height = 19
             Align = alLeft
             Alignment = taCenter
@@ -412,25 +446,22 @@ object vendaForm: TvendaForm
             Font.Name = 'Segoe UI Semibold'
             Font.Style = []
             ParentFont = False
-            ExplicitLeft = 105
-            ExplicitHeight = 17
           end
           object lblValor: TLabel
             AlignWithMargins = True
-            Left = 500
+            Left = 522
             Top = 4
-            Width = 76
+            Width = 58
             Height = 19
             Align = alLeft
             Alignment = taCenter
-            Caption = 'VALOR UNIT.'
+            Caption = 'VLR UNIT.'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -13
             Font.Name = 'Segoe UI Semibold'
             Font.Style = []
             ParentFont = False
-            ExplicitLeft = 158
             ExplicitHeight = 17
           end
         end
@@ -438,7 +469,7 @@ object vendaForm: TvendaForm
           Left = 0
           Top = 27
           Width = 685
-          Height = 59
+          Height = 67
           Align = alClient
           TabOrder = 1
           ExplicitLeft = 248
@@ -449,16 +480,90 @@ object vendaForm: TvendaForm
             Left = 597
             Top = 1
             Width = 87
-            Height = 57
+            Height = 65
+            Cursor = crHandPoint
             Align = alRight
+            Center = True
+            Picture.Data = {
+              0954506E67496D61676589504E470D0A1A0A0000000D49484452000000400000
+              00400806000000AA6971DE0000000970485973000001D8000001D801FA5CA672
+              0000001974455874536F667477617265007777772E696E6B73636170652E6F72
+              679BEE3C1A0000080F4944415478DADD5B7B50545518FFCEDD05470454D8852C
+              33331515D3306B2A6317A6E861593E2AA5B4187A38E56819BB3EFED0886A1A77
+              574CAD3F1CCB7452285F69919A4E018B3665969480A216A693095C1E22A02B7B
+              EFE93B974784779765F7DEBDD46FE632E7EEB9F79CF3FB711EDFF9CE7709A88C
+              D843F6185120264A693C5018050446E2CF03F11A805778DB638D78D5E3550784
+              9683C89DE038B194E84851E5246B959AED236A141A5DE0B88380984A0849A100
+              F101D443F1C552FCB31F0431974F5E7CA4D70A10F5FD9A48CE75E5252C321D6F
+              472BDDD03694A1261F838EAEE3EF5D7CA9570810F95D7654A8DBFD2AFEAFE643
+              6BD70E06EAF05AD3C2B9575F4C5C5AA78D00949268A77D0E01E2C03B63908877
+              452DD69F556D6A5C0B24530C9A00C6FCECE122276CC297EFD18878571CE2DCF4
+              B9AAFB16FDA6BA00D105F66984C006689DC57B132E219B977893F5537504A099
+              9CC1D96F25A65ED39A69378CB2F9C426ABAF43C237014A33430D35611B71A24B
+              D59A9F8FC8E1FB45A6C1C4B92D810BC0C8F3FD3EC7D464AD59F5105FA108D3BA
+              13C1BB0038D31B9D8E8D68CC3CAB351BBF40682E9FD83CDBDB70F02A80A1D0BE
+              0A7AFB98EF1E0EDE6CB5F658006381ED494AC856AD5BAF0828799A4FB2E4FA2C
+              40CC37B65B443DF90993FDB56EBB42B8A8E3F4132A1317FEDEBD009285E738D8
+              8B8C1CA550C49B2C6620847A15C0E074BC8022ACD7BAB56A800249AB315B3679
+              1440DAD8B408E54C07AD1BAB12AADCA23EAE3E7961BDAC0086027B16FEB24CEB
+              56AA0A4ADEC00931EB1A015AF7F3AE3310BC2D6D8FD04F17028F19E320F74249
+              A045D5824E1CDAEE4FE810C05068B3E0AD5D6BA272608D5C3F7A0A3C8E026CBE
+              700CACA70E809BFAB5FB6D05850C3EC99AFD2F018C85F663383D8ED59AAC1C96
+              0C9D041943EEEEB8CFAF3B03CF977D019784ABFE165986C6517C8700920F8FD0
+              C35A1395C3A38611B061CCE3D72C57654DD5905AB213CEBBFCF38C11E026549B
+              338E4AE51A0A6CD9B83E2ED49A6C578C0B8F85BCDB66415F2E4436FF50FD3998
+              FAEB67FE162F99C86D02384A70E310AF35E1CE308686C181843970439F08D9FC
+              26A1051E2EDE02C79B787FAB2846011208F3DB0B6EB8002AB9C8FD4108E160C7
+              B8A7E0EEFE8365F3459CC5D24A77C3DE9AD3815443434512C3B6BB4F504AB769
+              4DBA33568D7C10665F77ABC7FC772A8AE0BD733F045C0F5A8633086E793331FD
+              86D6A4DBF1F2E08990352CC963FE97FC496905A03E97E805049613B4FE723131
+              4B6BE20CC9038742CED8E9A0C7212087638D55F048712E5C16BBF574F908BA85
+              F50076DC74BBD6E487F78D827D09CF407F7D1FD9FCAAAB4D907274B3DFCB9E07
+              FC480C4EFB19EC4F3769493E42170A7B917C5C58B46CBE4B744BCBDD9186BF94
+              AEBA82F5801A4C4429596A54485FA86DB9ECD3B33A422077EC0CA9FB7BC2BCF2
+              3DB0B5B24C69F20C3C13C0858950A54A340D18021BE3A7C2BC137B7C5AA6DEBE
+              2519E6DEE07904AE3D7718B22A9C6A906770292AC0848841B013D76FB673BB4A
+              05987B3C0FF2F8531E9F9F151B0F6BE31EF698CF6CFED4921D205045E67C8F02
+              28320446851960F7F89952F76F076BF8FCF2BDB0ADEADAEE7B47E4F5B06BDC4C
+              08E574B2E59D6AAE952CBD8B6E975AE4197845264166AEE6DD960A83FB445E93
+              C74478EDE43EF8B4B2B4E337F6DCFE84D992B92B873AF71578E8E816F8FD7240
+              27DFBEA042916570E9D07BE1F5217779CC67222C3CF5B5E4CC08C3E1F1D5F854
+              181B1E23FB2CDBE7CF3CB61D9CF567D526CFC096415B4EA0677E6C13611B9102
+              6983C67B7C86D9EF4B4E7F038938494E318CF42CE6E96FE1C3F33F07833CB385
+              37B31EC0CCE0CC40CB6222BCD5CD8CDE1D580F5980C325582040969118A76D86
+              48C976A50AEDEABDF115871BFE8469BF6C95568F600147E67455B6C30B6EBC13
+              96DD6CF2F9F973571AE0013473F996E6A0914788B81D8E9548ABE10FF45504E6
+              D8985C9C23B9B8828CA3BCD93A415597D82BB8B57D735892C77C66DEBC78FC4B
+              D85D5D1E6CF2AC723B9F645DD42A40FE8A89C0713FAA510F5B19568CB81F3899
+              11F6EE9983907DF6FBE0934710912654272F2A0E8A5B7CCEA071E0C065B2B308
+              79FC494857CAB1D173FCDB2DCEA0F6C1C88C98D1F03EDAFDCCD951C21C1BBFE4
+              42B3A09463A387903B18311C5C110102F707A8783436D5380AE704B334E9FDA9
+              AC63A327903F1A934470DADE44AB70B99AB587EB42A1D1FF139DC04160396FB2
+              BEF5CF6D27F42F7A776088A86753B256A1AF2A83560A57C5B8BA942517650560
+              3016DAD229908FB46EAA2AF42979B626C9F249E7DF6443640C4E4711A62669DD
+              6085E1E44D96A46E436418FE874152F53A4E7FBB6F41526DE88D2746FE829D00
+              D5982D3BE5F2BC074A3AED2BF1EDD7B526101008B161D75FEC31DBEBCB2C64AE
+              70E5061C36695AF3F01339BCA9698EDFA1B2128EAC0B313435EC82FF5AB03425
+              797C78C4F4C082A5DB919FA98FE6C2D711A0E95AF3F28D3C6CE6C323D3950997
+              EF28545A1E6D98B268CDCF2B7542EC7C62C692AECB5DE002B421DAE9984A2865
+              9FCCF4B670BA0624F362B5D9DAA3006FBFDC60B145AB8609A27B232613B566DD
+              06A70E20ADD26CADE8E98B4A7C36C7B6D0317E9713186A91C252DE94B1DED72E
+              AF9C006D1890BF6A809E080B80D05741E153662F8DAEA104560B2E614DE78D8D
+              2602B4C398FF413825CDAD9FCEAA1471868D2DA1846C2042DFF5D5C9F31A152A
+              5379180B572650109FC63939056B60D14E9C9F453103E6572CE7004EBC39CC87
+              A7745B550F8DBB3EDF617071604205C650A0ECA3EA913881E050215D3E9FA7F5
+              F81B8E695A4E803B21525ADA8792A2F3C916BF03017DC1DFC2CEF6890CA484C6
+              0000000049454E44AE426082}
+            ExplicitHeight = 57
           end
           object editCodigo: TEdit
             AlignWithMargins = True
             Left = 4
             Top = 4
             Width = 69
-            Height = 51
+            Height = 59
             Align = alLeft
+            BevelInner = bvNone
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -16
@@ -467,13 +572,14 @@ object vendaForm: TvendaForm
             NumbersOnly = True
             ParentFont = False
             TabOrder = 0
+            ExplicitHeight = 51
           end
           object editNome: TEdit
             AlignWithMargins = True
             Left = 79
             Top = 4
             Width = 362
-            Height = 51
+            Height = 59
             Align = alLeft
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -483,13 +589,14 @@ object vendaForm: TvendaForm
             NumbersOnly = True
             ParentFont = False
             TabOrder = 1
+            ExplicitHeight = 51
           end
           object editQuant: TEdit
             AlignWithMargins = True
             Left = 447
             Top = 4
             Width = 69
-            Height = 51
+            Height = 59
             Align = alLeft
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -501,13 +608,14 @@ object vendaForm: TvendaForm
             TabOrder = 2
             ExplicitLeft = 564
             ExplicitTop = 6
+            ExplicitHeight = 51
           end
           object editValor: TEdit
             AlignWithMargins = True
             Left = 522
             Top = 4
             Width = 69
-            Height = 51
+            Height = 59
             Align = alLeft
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -519,15 +627,16 @@ object vendaForm: TvendaForm
             TabOrder = 3
             ExplicitLeft = 612
             ExplicitTop = -4
+            ExplicitHeight = 51
           end
         end
       end
       object pnlItens: TPanel
         AlignWithMargins = True
         Left = 3
-        Top = 95
+        Top = 103
         Width = 685
-        Height = 175
+        Height = 159
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 2
@@ -535,6 +644,20 @@ object vendaForm: TvendaForm
         ExplicitTop = 128
         ExplicitWidth = 185
         ExplicitHeight = 41
+        object DBGrid1: TDBGrid
+          AlignWithMargins = True
+          Left = 3
+          Top = 3
+          Width = 679
+          Height = 153
+          Align = alClient
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+        end
       end
     end
   end
