@@ -55,8 +55,9 @@ type
     procedure pnlSairMouseEnter(Sender: TObject);
     procedure pnlSairMouseLeave(Sender: TObject);
     procedure pnlMenuMouseEnter(Sender: TObject);
-    procedure pnlMenuMouseLeave(Sender: TObject);
     procedure FormResize(Sender: TObject);
+    procedure pnlFundoMouseEnter(Sender: TObject);
+    procedure pnlMenuResize(Sender: TObject);
   private
     { Private declarations }
   public
@@ -82,14 +83,26 @@ begin
   lblValor.Width   := 69;
 end;
 
+procedure TvendaForm.pnlFundoMouseEnter(Sender: TObject);
+begin
+  pnlMenu.Width := 60;
+end;
+
 procedure TvendaForm.pnlMenuMouseEnter(Sender: TObject);
 begin
   pnlMenu.Width := 177;
 end;
 
-procedure TvendaForm.pnlMenuMouseLeave(Sender: TObject);
+procedure TvendaForm.pnlMenuResize(Sender: TObject);
 begin
-  pnlMenu.Width := 60;
+  editCodigo.Width := 69;
+  editNome.Width   := (pnlEdit.Width - (69*3) - 110);
+  editQuant.Width  := 69;
+  editValor.Width  := 69;
+  lblCod.Width     := 69;
+  lblNome.Width    := (pnlEdit.Width - (69*3) - 110);
+  lblQuant.Width   := 69;
+  lblValor.Width   := 69;
 end;
 
 procedure TvendaForm.pnlSairClick(Sender: TObject);

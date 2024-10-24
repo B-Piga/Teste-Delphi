@@ -145,7 +145,7 @@ object vendaForm: TvendaForm
       ParentBackground = False
       TabOrder = 0
       OnMouseEnter = pnlMenuMouseEnter
-      OnMouseLeave = pnlMenuMouseLeave
+      OnResize = pnlMenuResize
       ExplicitHeight = 337
       object Panel7: TPanel
         AlignWithMargins = True
@@ -157,7 +157,6 @@ object vendaForm: TvendaForm
         BevelOuter = bvNone
         TabOrder = 0
         OnMouseEnter = pnlMenuMouseEnter
-        OnMouseLeave = pnlMenuMouseLeave
         ExplicitLeft = 4
         ExplicitTop = 4
         ExplicitWidth = 177
@@ -201,7 +200,6 @@ object vendaForm: TvendaForm
             04F95FC093315E4C62B97C94D2E5DBC59C8C562B367F4E8BCCFE020B1CCD2175
             3597E90000000049454E44AE426082}
           OnMouseEnter = pnlMenuMouseEnter
-          OnMouseLeave = pnlMenuMouseLeave
           ExplicitLeft = 1
           ExplicitTop = 1
           ExplicitHeight = 51
@@ -223,7 +221,6 @@ object vendaForm: TvendaForm
           ParentFont = False
           Layout = tlCenter
           OnMouseEnter = pnlMenuMouseEnter
-          OnMouseLeave = pnlMenuMouseLeave
           ExplicitWidth = 106
           ExplicitHeight = 17
         end
@@ -238,7 +235,6 @@ object vendaForm: TvendaForm
         BevelOuter = bvNone
         TabOrder = 1
         OnMouseEnter = pnlMenuMouseEnter
-        OnMouseLeave = pnlMenuMouseLeave
         ExplicitLeft = 4
         ExplicitTop = 4
         ExplicitWidth = 177
@@ -280,7 +276,6 @@ object vendaForm: TvendaForm
             3F507146013C20CE651C200544D7A0003820EA060D4021644BEF400B90BCBC0E
             FF053C8557292CE2EDDB0000000049454E44AE426082}
           OnMouseEnter = pnlMenuMouseEnter
-          OnMouseLeave = pnlMenuMouseLeave
           ExplicitLeft = 1
           ExplicitTop = 1
           ExplicitHeight = 51
@@ -302,7 +297,6 @@ object vendaForm: TvendaForm
           ParentFont = False
           Layout = tlCenter
           OnMouseEnter = pnlMenuMouseEnter
-          OnMouseLeave = pnlMenuMouseLeave
           ExplicitWidth = 82
           ExplicitHeight = 17
         end
@@ -364,6 +358,7 @@ object vendaForm: TvendaForm
       Color = clWhite
       ParentBackground = False
       TabOrder = 2
+      OnMouseEnter = pnlFundoMouseEnter
       ExplicitLeft = 280
       ExplicitTop = 152
       ExplicitWidth = 185

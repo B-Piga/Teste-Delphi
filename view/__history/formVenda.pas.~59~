@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.Imaging.pngimage;
+  Vcl.Imaging.pngimage, Data.DB, Vcl.Grids, Vcl.DBGrids;
 
 type
   TvendaForm = class(TForm)
@@ -27,10 +27,10 @@ type
     Label4: TLabel;
     pnlMenu: TPanel;
     Panel7: TPanel;
-    Image1: TImage;
+    imgDeletarVenda: TImage;
     Label5: TLabel;
     Panel8: TPanel;
-    Image3: TImage;
+    imgPesquisa: TImage;
     Label6: TLabel;
     pnlTotal: TPanel;
     pnlFundo: TPanel;
@@ -48,6 +48,9 @@ type
     editQuant: TEdit;
     editValor: TEdit;
     Image4: TImage;
+    lblTotal: TLabel;
+    Label8: TLabel;
+    DBGrid1: TDBGrid;
     procedure pnlSairClick(Sender: TObject);
     procedure pnlSairMouseEnter(Sender: TObject);
     procedure pnlSairMouseLeave(Sender: TObject);
@@ -69,7 +72,14 @@ implementation
 
 procedure TvendaForm.FormResize(Sender: TObject);
 begin
-  editNome.Width := (pnlEdit.Width - (69*3) - 97);
+  editCodigo.Width := 69;
+  editNome.Width   := (pnlEdit.Width - (69*3) - 110);
+  editQuant.Width  := 69;
+  editValor.Width  := 69;
+  lblCod.Width     := 69;
+  lblNome.Width    := (pnlEdit.Width - (69*3) - 110);
+  lblQuant.Width   := 69;
+  lblValor.Width   := 69;
 end;
 
 procedure TvendaForm.pnlMenuMouseEnter(Sender: TObject);
