@@ -53,6 +53,8 @@ type
     DBGrid1: TDBGrid;
     cdsItens: TClientDataSet;
     dsItens: TDataSource;
+    Label7: TLabel;
+    Label8: TLabel;
     procedure pnlSairClick(Sender: TObject);
     procedure pnlSairMouseEnter(Sender: TObject);
     procedure pnlSairMouseLeave(Sender: TObject);
@@ -62,6 +64,8 @@ type
     procedure pnlMenuResize(Sender: TObject);
     procedure Image4Click(Sender: TObject);
     procedure editQuantKeyPress(Sender: TObject; var Key: Char);
+    procedure pnlCancelaClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     procedure iniciaDataSet;
@@ -105,6 +109,11 @@ begin
   lblValor.Width   := 69;
 end;
 
+procedure TvendaForm.FormShow(Sender: TObject);
+begin
+  iniciaForm;
+end;
+
 procedure TvendaForm.Image4Click(Sender: TObject);
 begin
   with cdsItens, FieldDefs do
@@ -129,6 +138,7 @@ begin
     Add('QUANTIDADE', ftFloat);
     Add('VLR_UNIT', ftCurrency);
     Add('VLR_TOTAL', ftCurrency);
+    if not Active then    
     CreateDataSet;
   end;
 end;
@@ -139,6 +149,13 @@ begin
   editNome.Text   := 'Pressione ENTER para pesquisar';
   editQuant.Text  := '';
   editValor.Text  := '';
+  lblVlrTotal.Caption := 'R$ 0,00';
+  lblCliente.Caption  := 'CONSUMIDOR';
+end;
+
+procedure TvendaForm.pnlCancelaClick(Sender: TObject);
+begin
+  iniciaForm;
 end;
 
 procedure TvendaForm.pnlFundoMouseEnter(Sender: TObject);

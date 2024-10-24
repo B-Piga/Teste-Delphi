@@ -362,13 +362,13 @@ object vendaForm: TvendaForm
         Color = clSilver
         ParentBackground = False
         TabOrder = 0
-        object Label7: TLabel
+        object lblQntItens: TLabel
           Left = 0
           Top = 0
-          Width = 33
+          Width = 34
           Height = 23
           Align = alLeft
-          Caption = 'Label7'
+          Caption = 'QTD: 2'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -378,13 +378,13 @@ object vendaForm: TvendaForm
           Layout = tlCenter
           ExplicitHeight = 13
         end
-        object Label8: TLabel
-          Left = 658
+        object lblNumItens: TLabel
+          Left = 642
           Top = 0
-          Width = 33
+          Width = 49
           Height = 23
           Align = alRight
-          Caption = 'Label7'
+          Caption = 'N'#176' Itens: 1'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -392,7 +392,7 @@ object vendaForm: TvendaForm
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
-          ExplicitLeft = 0
+          ExplicitLeft = 646
           ExplicitHeight = 13
         end
       end
@@ -641,6 +641,7 @@ object vendaForm: TvendaForm
             Font.Style = []
             ParentFont = False
             TabOrder = 3
+            OnKeyPress = editQuantKeyPress
             ExplicitHeight = 29
           end
         end

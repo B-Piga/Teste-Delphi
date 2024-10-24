@@ -14,6 +14,7 @@ object vendaForm: TvendaForm
   OldCreateOrder = False
   WindowState = wsMaximized
   OnResize = FormResize
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnlToolBar: TPanel
@@ -322,7 +323,7 @@ object vendaForm: TvendaForm
         Layout = tlCenter
         ExplicitHeight = 37
       end
-      object Label8: TLabel
+      object lblVlrTotal: TLabel
         AlignWithMargins = True
         Left = 650
         Top = 3
@@ -361,6 +362,39 @@ object vendaForm: TvendaForm
         Color = clSilver
         ParentBackground = False
         TabOrder = 0
+        object Label7: TLabel
+          Left = 0
+          Top = 0
+          Width = 33
+          Height = 23
+          Align = alLeft
+          Caption = 'Label7'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Segoe UI Semibold'
+          Font.Style = []
+          ParentFont = False
+          Layout = tlCenter
+          ExplicitHeight = 13
+        end
+        object Label8: TLabel
+          Left = 658
+          Top = 0
+          Width = 33
+          Height = 23
+          Align = alRight
+          Caption = 'Label7'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Segoe UI Semibold'
+          Font.Style = []
+          ParentFont = False
+          Layout = tlCenter
+          ExplicitLeft = 0
+          ExplicitHeight = 13
+        end
       end
       object pnlAddItens: TPanel
         AlignWithMargins = True
@@ -555,6 +589,7 @@ object vendaForm: TvendaForm
             NumbersOnly = True
             ParentFont = False
             TabOrder = 0
+            Text = 'Pressione ENTER para pesquisar'
             ExplicitHeight = 29
           end
           object editNome: TEdit
@@ -564,14 +599,15 @@ object vendaForm: TvendaForm
             Width = 362
             Height = 59
             Align = alLeft
+            Alignment = taCenter
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -16
             Font.Name = 'Segoe UI Semibold'
             Font.Style = []
-            NumbersOnly = True
             ParentFont = False
             TabOrder = 1
+            Text = 'Pressione ENTER para pesquisar'
             ExplicitHeight = 29
           end
           object editQuant: TEdit
@@ -586,9 +622,9 @@ object vendaForm: TvendaForm
             Font.Height = -16
             Font.Name = 'Segoe UI Semibold'
             Font.Style = []
-            NumbersOnly = True
             ParentFont = False
             TabOrder = 2
+            OnKeyPress = editQuantKeyPress
             ExplicitHeight = 29
           end
           object editValor: TEdit
@@ -603,9 +639,9 @@ object vendaForm: TvendaForm
             Font.Height = -16
             Font.Name = 'Segoe UI Semibold'
             Font.Style = []
-            NumbersOnly = True
             ParentFont = False
             TabOrder = 3
+            OnKeyPress = editQuantKeyPress
             ExplicitHeight = 29
           end
         end
@@ -704,6 +740,7 @@ object vendaForm: TvendaForm
       ParentBackground = False
       ParentFont = False
       TabOrder = 1
+      OnClick = pnlCancelaClick
       object Label2: TLabel
         Left = 0
         Top = 0

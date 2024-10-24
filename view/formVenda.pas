@@ -53,8 +53,8 @@ type
     DBGrid1: TDBGrid;
     cdsItens: TClientDataSet;
     dsItens: TDataSource;
-    Label7: TLabel;
-    Label8: TLabel;
+    lblQntItens: TLabel;
+    lblNumItens: TLabel;
     procedure pnlSairClick(Sender: TObject);
     procedure pnlSairMouseEnter(Sender: TObject);
     procedure pnlSairMouseLeave(Sender: TObject);
@@ -88,11 +88,11 @@ begin
     Key := #0  // Se não for permitido, cancela o caractere
   else
   begin
+    // Trata para evitar erro de conversão
+    if (Key = '.') then
+      Key := ',';
     // Evita a inserção de múltiplas vírgulas ou pontos
     if (Key = ',') and (Pos(',', TEdit(Sender).Text) > 0) then
-      Key := #0;
-
-    if (Key = '.') and (Pos('.', TEdit(Sender).Text) > 0) then
       Key := #0;
   end;
 end;
@@ -151,6 +151,8 @@ begin
   editValor.Text  := '';
   lblVlrTotal.Caption := 'R$ 0,00';
   lblCliente.Caption  := 'CONSUMIDOR';
+  lblQntItens.Caption := 'QTD: 0';
+  lblNumItens.Caption := 'N° ITENS: 0';
 end;
 
 procedure TvendaForm.pnlCancelaClick(Sender: TObject);
