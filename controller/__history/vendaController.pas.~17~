@@ -38,7 +38,6 @@ end;
 
 procedure TVendaController.IniciarVenda;
 begin
-  FVenda.Numero := Random(1000);  // Exemplo simples para gerar número de venda
   FVenda.Data := Now;
 end;
 
@@ -56,6 +55,7 @@ end;
 
 procedure TVendaController.FinalizarVenda;
 var Query : TFDQuery;
+    Produto : TProduto;
 begin
   Query := TFDQuery.Create(nil);
   try
@@ -65,12 +65,28 @@ begin
     try
       with Query, SQL do
       begin
-        Add('INSERT INTO tbPedido (x1, x2, x3)');
-        Add('VALUES (:x1, :x2, :x3)');
+        Add('INSERT INTO tbPedido (COD_CLI, VLR_TOTAL)');
+        Add('VALUES (:x1, :x2');
         ParamByName('x1').Value := 0;
         ParamByName('x2').Value := 0;
-        ParamByName('x3').Value := 0;
-        FVenda.Numero := Connection.GetLastAutoGenValue('CODIGO');
+        ExecSQL;
+        FVenda.Numero := Connection.GetLastAutoGenValue('CODIGO_PEDIDO');
+
+        // *inserção dos produtos*
+        Close;
+        Clear;
+        for Produto in Venda.Produtos do
+        begin
+          Add('INSERT INTO tbItensPedido (CODIGO_PEDIDO, COD_PROD, QUANT, VLR_UNIT, VLR_TOTAL)');
+          Add('VALUES (:CODIGO_PEDIDO, :COD_PROD, :QUANT, :VLR_UNIT, :VLR_TOTAL)');
+          ParamByName('CODIGO_PEDIDO').Value := FVenda.Numero;
+          ParamByName('COD_PROD').Value      := Produto.Codigo;
+          ParamByName('QUANT').Value         := Produto.Quantidade;
+          ParamByName('VLR_UNIT').Value      := Produto.Preco;
+          ParamByName('VLR_TOTAL').Value     := (Produto.Quantidade * Produto.Preco);
+          ExecSQL;
+        end;
+        Dm.FDC_MySQL.Commit;
       end;
     except
       on E: Exception do
@@ -78,10 +94,9 @@ begin
         Dm.FDC_MySQL.Rollback;
         raise Exception.Create('Erro ao finalizar a venda: ' + E.Message);
       end;
-
     end;
   finally
-
+    Query.Free;
   end;
 end;
 

@@ -8,8 +8,7 @@ uses
   Venda in 'model\Venda.pas',
   vendaController in 'controller\vendaController.pas',
   dmDatabase in 'database\dmDatabase.pas' {Dm: TDataModule},
-  dmFuncoes in 'utility\dmFuncoes.pas' {DmFun: TDataModule},
-  formPesquisaCliente in 'view\formPesquisaCliente.pas' {pesquisaCliForm};
+  dmFuncoes in 'utility\dmFuncoes.pas' {DmFun: TDataModule};
 
 {$R *.res}
 
@@ -19,6 +18,5 @@ begin
   Application.CreateForm(TvendaForm, vendaForm);
   Application.CreateForm(TDm, Dm);
   Application.CreateForm(TDmFun, DmFun);
-  Application.CreateForm(TpesquisaCliForm, pesquisaCliForm);
   Application.Run;
 end.

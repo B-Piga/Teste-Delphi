@@ -383,6 +383,8 @@ begin
     ShowMessage('Nenhum produto registrado.');
     Exit;
   end;
+
+  vendaController.TVendaController.
 end;
 
 procedure TvendaForm.pnlFundoMouseEnter(Sender: TObject);

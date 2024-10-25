@@ -21,7 +21,6 @@ type
     Panel3: TPanel;
     imgCliente: TImage;
     Panel4: TPanel;
-    Label3: TLabel;
     lblCliente: TLabel;
     Panel5: TPanel;
     Image2: TImage;
@@ -77,6 +76,9 @@ type
       Shift: TShiftState);
     procedure DBGrid1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure pnlFinalizaClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure imgClienteClick(Sender: TObject);
   private
     { Private declarations }
     FListBox : TListBox;
@@ -97,7 +99,7 @@ implementation
 
 {$R *.dfm}
 
-uses dmFuncoes;
+uses dmFuncoes, formPesquisaCliente, dmDatabase, vendaController;
 
 procedure TvendaForm.carregaTotais;
 var iNumItens : Integer;
@@ -245,6 +247,17 @@ begin
   end;
 end;
 
+procedure TvendaForm.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = VK_F3 then
+  begin
+    if pesquisaCliForm.ModalResult = mrOk then
+
+  end;
+
+end;
+
 procedure TvendaForm.FormResize(Sender: TObject);
 begin
   editCodigo.Width := 69;
@@ -273,7 +286,6 @@ begin
     FieldByName('NOME').AsString        := editNome.Text;
     FieldByName('QUANTIDADE').AsFloat   := StrToFloat(editQuant.Text);
     FieldByName('VLR_UNIT').AsCurrency  := StrToFloat(editValor.Text);
-//    FieldByName('VLR_TOTAL').AsCurrency  := StrToFloat(editValor.Text) * StrToFloat(editQuant.Text);
     Post;
   end;
 end;
@@ -295,6 +307,15 @@ begin
       editQuant.SelectAll;
       if Assigned(FListBox) then FreeAndNil(FListBox)      
     end;
+  end;
+end;
+
+procedure TvendaForm.imgClienteClick(Sender: TObject);
+begin
+  pesquisaCliForm.ShowModal;
+  if pesquisaCliForm.ModalResult = mrOk then
+  begin
+    lblCliente.Caption := Dm.FDQ_Cliente.FieldByName('CODIGO').AsString + '-' + Dm.FDQ_Cliente.FieldByName('NOME').AsString
   end;
 end;
 
@@ -347,6 +368,21 @@ end;
 procedure TvendaForm.pnlCancelaClick(Sender: TObject);
 begin
   iniciaForm;
+end;
+
+procedure TvendaForm.pnlFinalizaClick(Sender: TObject);
+begin
+  if lblCliente.Caption = 'CONSUMIDOR' then
+  begin
+    ShowMessage('Venda sem cliente designado!');
+    Exit;
+  end;
+
+  if cdsItens.IsEmpty then
+  begin
+    ShowMessage('Nenhum produto registrado.');
+    Exit;
+  end;
 end;
 
 procedure TvendaForm.pnlFundoMouseEnter(Sender: TObject);

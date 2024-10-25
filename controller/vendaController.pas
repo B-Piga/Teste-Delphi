@@ -65,11 +65,10 @@ begin
     try
       with Query, SQL do
       begin
-        Add('INSERT INTO tbPedido (x1, x2, x3)');
-        Add('VALUES (:x1, :x2, :x3)');
-        ParamByName('x1').Value := 0;
-        ParamByName('x2').Value := 0;
-        ParamByName('x3').Value := 0;
+        Add('INSERT INTO tbPedido (COD_CLI, VLR_TOTAL)');
+        Add('VALUES (:COD_CLI, :VLR_TOTAL');
+        ParamByName('COD_CLI').Value := 0;
+        ParamByName('VLR_TOTAL').Value := 0;
         ExecSQL;
         FVenda.Numero := Connection.GetLastAutoGenValue('CODIGO_PEDIDO');
 
