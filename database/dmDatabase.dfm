@@ -48,8 +48,8 @@ object Dm: TDm
     Connection = FDC_MySQL
     SQL.Strings = (
       
-        'select a.codigo_pedido,b.nome, a.dt_emissao, a.vlr_total from tb' +
-        'pedidos a'
+        'select a.codigo_pedido,b.nome, a.dt_emissao, a.vlr_total, a.cod_' +
+        'cli from tbpedidos a'
       'left outer join tbclientes b on a.cod_cli = b.codigo')
     Left = 520
     Top = 200

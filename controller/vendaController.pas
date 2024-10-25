@@ -107,10 +107,11 @@ begin
       Add('left outer join tbProdutos a on a.codigo = b.cod_produto');
       Add('where b.codigo_pedido = :cod');
       ParamByName('cod').AsInteger := FVenda.Numero;
+      Open;
     end;
   finally
     Result := Query;
-    Query.Free;
+//    Query.Free;
   end;
 end;
 

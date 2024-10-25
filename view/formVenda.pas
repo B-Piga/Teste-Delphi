@@ -330,7 +330,30 @@ begin
     FVenda                      := TVendaController.Create;
     FVenda.Venda.Numero         := Dm.FDQ_Venda.FieldByName('CODIGO_PEDIDO').AsInteger;
     FVenda.Venda.Cliente.Codigo := Dm.FDQ_Venda.FieldByName('COD_CLI').AsInteger;
+    if not cdsItens.IsEmpty then    
     cdsItens.EmptyDataSet;
+    Query := TFDQuery.Create(nil);
+    try
+      Query := FVenda.ItensDaVenda;
+      if Query.RecordCount > 0 then
+      begin
+        Query.First;
+        while not Query.Eof do
+        begin
+          with Query do
+          begin
+            insereProduto(FieldByName('CODIGO').AsInteger,
+                          FieldByName('DESCRICAO').AsString,
+                          FieldByName('QUANT').AsFloat,
+                          FieldByName('VLR_UNIT').AsCurrency);
+            carregaTotais;
+            Next;
+          end;
+        end;
+      end;
+    finally
+      Query.Free;
+    end;
   end;
 end;
 
@@ -352,6 +375,7 @@ end;
 procedure TvendaForm.iniciaForm;
 begin
   if Assigned(FVenda) then FreeAndNil(FVenda);
+  if not cdsItens.IsEmpty then cdsItens.EmptyDataSet;
   FVenda          := TVendaController.Create;
   editCodigo.Text := '';
   editNome.Text   := 'Digite aqui para pesquisar seu produto';
@@ -436,6 +460,7 @@ begin
   FVenda.FinalizarVenda;
 
   ShowMessage('Venda Finalizada!');
+  iniciaForm;
 end;
 
 procedure TvendaForm.pnlFundoMouseEnter(Sender: TObject);
