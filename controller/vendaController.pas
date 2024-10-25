@@ -39,7 +39,7 @@ begin
     try
       with Query, SQL do
       begin
-        Add('UPDATE tbPedido SET COD_CLI = :COD_CLI, VLR_TOTAL = :VLR_TOTAL');
+        Add('UPDATE tbPedidos SET COD_CLI = :COD_CLI, VLR_TOTAL = :VLR_TOTAL');
         Add('WHERE CODIGO_PEDIDO = :COD');
         ParamByName('COD').Value := FVenda.Numero;
         ParamByName('COD_CLI').Value := FVenda.Cliente.Codigo;
@@ -51,12 +51,13 @@ begin
         Clear;
         Add('DELETE FROM tbItensPedidos where CODIGO_PEDIDO = :COD');
         ParamByName('COD').Value := FVenda.Numero;
+        ExecSQL;
 
         for Produto in Venda.Produtos do
         begin
           Close;
           Clear;
-          Add('INSERT INTO tbItensPedido (CODIGO_PEDIDO, COD_PROD, QUANT, VLR_UNIT, VLR_TOTAL)');
+          Add('INSERT INTO tbItensPedidos (CODIGO_PEDIDO, COD_PRODUTO, QUANT, VLR_UNIT, VLR_TOTAL)');
           Add('VALUES (:CODIGO_PEDIDO, :COD_PROD, :QUANT, :VLR_UNIT, :VLR_TOTAL)');
           ParamByName('CODIGO_PEDIDO').Value := FVenda.Numero;
           ParamByName('COD_PROD').Value      := Produto.Codigo;
@@ -111,7 +112,6 @@ begin
     end;
   finally
     Result := Query;
-//    Query.Free;
   end;
 end;
 

@@ -39,17 +39,18 @@ implementation
 procedure TDm.DataModuleCreate(Sender: TObject);
 var
   Ini: TIniFile;
-  Host, Username, Password, DBName: string;
+  Host, Username, Password, DBName, LibraryPath: string;
   Port: Integer;
 begin
   // Lê o arquivo .ini
   Ini := TIniFile.Create(GetCurrentDir+'/config.ini');
   try
-    Host     := Ini.ReadString('database', 'host', 'localhost');
-    Username := Ini.ReadString('database', 'username', 'root');
-    Password := Ini.ReadString('database', 'password', '');
-    DBName   := Ini.ReadString('database', 'dbname', '');
-    Port     := Ini.ReadInteger('database', 'port', 3306);
+    Host        := Ini.ReadString('database', 'host', 'localhost');
+    Username    := Ini.ReadString('database', 'username', 'root');
+    Password    := Ini.ReadString('database', 'password', '');
+    DBName      := Ini.ReadString('database', 'dbname', '');
+    Port        := Ini.ReadInteger('database', 'port', 3306);
+    LibraryPath := Ini.ReadString('database', 'dll', '');
   finally
     Ini.Free;
   end;
@@ -64,6 +65,8 @@ begin
       Params.Values['User_Name']    := Username;
       Params.Values['Password']     := Password;
       Params.Values['CharacterSet'] := 'utf8mb4';
+      if LibraryPath <> '' then
+      Params.Values['LibraryName'] := LibraryPath;
       // Tentando conectar
       Connected := True;
     end;
