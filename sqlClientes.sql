@@ -1,0 +1,21 @@
+-- Inserir 20 Clientes
+INSERT INTO tbClientes (CODIGO, NOME, CIDADE, UF) VALUES (1, 'João da Silva', 'São Paulo', 'SP');
+INSERT INTO tbClientes (CODIGO, NOME, CIDADE, UF) VALUES (2, 'Maria Oliveira', 'Rio de Janeiro', 'RJ');
+INSERT INTO tbClientes (CODIGO, NOME, CIDADE, UF) VALUES (3, 'Carlos Pereira', 'Belo Horizonte', 'MG');
+INSERT INTO tbClientes (CODIGO, NOME, CIDADE, UF) VALUES (4, 'Ana Lima', 'Curitiba', 'PR');
+INSERT INTO tbClientes (CODIGO, NOME, CIDADE, UF) VALUES (5, 'Paulo Mendes', 'Porto Alegre', 'RS');
+INSERT INTO tbClientes (CODIGO, NOME, CIDADE, UF) VALUES (6, 'Mariana Souza', 'Salvador', 'BA');
+INSERT INTO tbClientes (CODIGO, NOME, CIDADE, UF) VALUES (7, 'Lucas Almeida', 'Fortaleza', 'CE');
+INSERT INTO tbClientes (CODIGO, NOME, CIDADE, UF) VALUES (8, 'Fernanda Costa', 'Manaus', 'AM');
+INSERT INTO tbClientes (CODIGO, NOME, CIDADE, UF) VALUES (9, 'Roberto Gomes', 'Brasília', 'DF');
+INSERT INTO tbClientes (CODIGO, NOME, CIDADE, UF) VALUES (10, 'Beatriz Ribeiro', 'Recife', 'PE');
+INSERT INTO tbClientes (CODIGO, NOME, CIDADE, UF) VALUES (11, 'Guilherme Fernandes', 'Belém', 'PA');
+INSERT INTO tbClientes (CODIGO, NOME, CIDADE, UF) VALUES (12, 'Isabela Martins', 'Goiânia', 'GO');
+INSERT INTO tbClientes (CODIGO, NOME, CIDADE, UF) VALUES (13, 'Pedro Lima', 'São Luís', 'MA');
+INSERT INTO tbClientes (CODIGO, NOME, CIDADE, UF) VALUES (14, 'Larissa Freitas', 'Natal', 'RN');
+INSERT INTO tbClientes (CODIGO, NOME, CIDADE, UF) VALUES (15, 'Rafael Duarte', 'João Pessoa', 'PB');
+INSERT INTO tbClientes (CODIGO, NOME, CIDADE, UF) VALUES (16, 'Cíntia Castro', 'Aracaju', 'SE');
+INSERT INTO tbClientes (CODIGO, NOME, CIDADE, UF) VALUES (17, 'Fábio Cardoso', 'Maceió', 'AL');
+INSERT INTO tbClientes (CODIGO, NOME, CIDADE, UF) VALUES (18, 'Vanessa Pinto', 'Teresina', 'PI');
+INSERT INTO tbClientes (CODIGO, NOME, CIDADE, UF) VALUES (19, 'Tiago Rocha', 'Campo Grande', 'MS');
+INSERT INTO tbClientes (CODIGO, NOME, CIDADE, UF) VALUES (20, 'Cláudia Neves', 'Cuiabá', 'MT');
