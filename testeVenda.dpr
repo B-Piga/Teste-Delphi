@@ -7,7 +7,8 @@ uses
   Cliente in 'model\Cliente.pas',
   Venda in 'model\Venda.pas',
   vendaController in 'controller\vendaController.pas',
-  dmDatabase in 'database\dmDatabase.pas' {Dm: TDataModule};
+  dmDatabase in 'database\dmDatabase.pas' {Dm: TDataModule},
+  dmFuncoes in 'utility\dmFuncoes.pas' {DmFun: TDataModule};
 
 {$R *.res}
 
@@ -16,5 +17,6 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TvendaForm, vendaForm);
   Application.CreateForm(TDm, Dm);
+  Application.CreateForm(TDmFun, DmFun);
   Application.Run;
 end.

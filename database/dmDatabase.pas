@@ -7,7 +7,8 @@ uses
   FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait,
   Data.DB, FireDAC.Comp.Client, FireDAC.Phys.MySQLDef, FireDAC.Comp.UI,
-  FireDAC.Phys.MySQL, Vcl.Dialogs;
+  FireDAC.Phys.MySQL, Vcl.Dialogs, FireDAC.Stan.Param, FireDAC.DatS,
+  FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet;
 
 type
   TDm = class(TDataModule)
@@ -15,6 +16,8 @@ type
     FDPhysMySQLDriverLink1: TFDPhysMySQLDriverLink;
     FDGUIxWaitCursor1: TFDGUIxWaitCursor;
     FDT_MySQL: TFDTransaction;
+    FDQ_Cliente: TFDQuery;
+    DS_Cliente: TDataSource;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
@@ -38,7 +41,7 @@ var
   Port: Integer;
 begin
   // Lê o arquivo .ini
-  Ini := TIniFile.Create('config.ini');
+  Ini := TIniFile.Create(GetCurrentDir+'/config.ini');
   try
     Host     := Ini.ReadString('database', 'host', 'localhost');
     Username := Ini.ReadString('database', 'username', 'root');
@@ -48,20 +51,17 @@ begin
   finally
     Ini.Free;
   end;
-
   // Atribuindo aos parâmetros
   try
     with FDC_MySQL do
     begin
       DriverName := 'MySQL';
-
       Params.Values['Server']       := Host;
       Params.Values['Port']         := IntToStr(Port);
       Params.Values['Database']     := DBName;
       Params.Values['User_Name']    := Username;
       Params.Values['Password']     := Password;
       Params.Values['CharacterSet'] := 'utf8mb4';
-
       // Tentando conectar
       Connected := True;
     end;

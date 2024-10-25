@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.Imaging.pngimage, Data.DB, Vcl.Grids, Vcl.DBGrids, Datasnap.DBClient;
+  Vcl.Imaging.pngimage, Data.DB, Vcl.Grids, Vcl.DBGrids, Datasnap.DBClient,
+  Vcl.Buttons, FireDAC.Comp.Client, FireDAC.DApt;
 
 type
   TvendaForm = class(TForm)
@@ -20,7 +21,6 @@ type
     Panel3: TPanel;
     imgCliente: TImage;
     Panel4: TPanel;
-    Label3: TLabel;
     lblCliente: TLabel;
     Panel5: TPanel;
     Image2: TImage;
@@ -47,7 +47,6 @@ type
     editNome: TEdit;
     editQuant: TEdit;
     editValor: TEdit;
-    Image4: TImage;
     lblTotal: TLabel;
     lblVlrTotal: TLabel;
     DBGrid1: TDBGrid;
@@ -55,6 +54,7 @@ type
     dsItens: TDataSource;
     lblQntItens: TLabel;
     lblNumItens: TLabel;
+    SpeedButton1: TSpeedButton;
     procedure pnlSairClick(Sender: TObject);
     procedure pnlSairMouseEnter(Sender: TObject);
     procedure pnlSairMouseLeave(Sender: TObject);
@@ -62,14 +62,32 @@ type
     procedure FormResize(Sender: TObject);
     procedure pnlFundoMouseEnter(Sender: TObject);
     procedure pnlMenuResize(Sender: TObject);
-    procedure Image4Click(Sender: TObject);
     procedure editQuantKeyPress(Sender: TObject; var Key: Char);
     procedure pnlCancelaClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure editNomeChange(Sender: TObject);
+    procedure editNomeEnter(Sender: TObject);
+    procedure editCodigoClick(Sender: TObject);
+    procedure editCodigoEnter(Sender: TObject);
+    procedure editNomeKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure ListBoxKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure DBGrid1KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure pnlFinalizaClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure imgClienteClick(Sender: TObject);
   private
     { Private declarations }
+    FListBox : TListBox;
     procedure iniciaDataSet;
     procedure iniciaForm;
+    procedure insereProduto;
+    procedure carregaTotais;
+    procedure pesquisaProduto;
+    procedure criaListBox;
   public
     { Public declarations }
   end;
@@ -80,6 +98,138 @@ var
 implementation
 
 {$R *.dfm}
+
+uses dmFuncoes, formPesquisaCliente, dmDatabase, vendaController;
+
+procedure TvendaForm.carregaTotais;
+var iNumItens : Integer;
+    eQuant : Extended;
+    cTotal : Currency;
+begin
+  eQuant    := 0;
+  iNumItens := 0;
+  cTotal    := 0;
+
+  if not cdsItens.Active then
+  begin
+    ShowMessage('O ClientDataSet está fechado.');
+    Exit;
+  end;
+  if cdsItens.IsEmpty then
+  begin
+    ShowMessage('O ClientDataSet não contém nenhum registro.');
+    Exit;
+  end;
+  // Salvar a posição atual do cursor do ClientDataSet
+  cdsItens.DisableControls;  // Evita atualizações visuais durante a iteração
+  try
+    cdsItens.First;  // Posiciona no primeiro registro
+    while not cdsItens.Eof do
+    begin
+      with cdsItens do
+      begin
+        inc(iNumItens);
+        eQuant := eQuant + FieldByName('QUANTIDADE').AsFloat;
+        cTotal := cTotal + (FieldByName('QUANTIDADE').AsFloat * FieldByName('VLR_UNIT').AsFloat);
+        Edit;
+        FieldByName('VLR_TOTAL').AsCurrency := FieldByName('QUANTIDADE').AsFloat * FieldByName('VLR_UNIT').AsFloat;
+        Post;
+      end;
+      cdsItens.Next;  // Avança para o próximo registro
+    end;
+  finally
+    cdsItens.EnableControls;  // Restaura as atualizações visuais
+    lblQntItens.Caption := 'QTD: ' + eQuant.ToString;
+    lblNumItens.Caption := 'N° Itens: ' + iNumItens.ToString;
+    lblVlrTotal.Caption := CurrToStr(cTotal);
+  end;
+end;
+
+procedure TvendaForm.criaListBox;
+begin
+  if Assigned(FListBox) then FreeAndNil(FListBox);
+  if not Assigned(FListBox) then
+  begin
+    FListBox           := TListBox.Create(nil);
+    FListBox.Parent    := pnlFundo;
+    FListBox.OnKeyDown := ListBoxKeyDown;
+    FListBox.Left      := editNome.Left;
+    FListBox.Width     := editNome.Width;
+    FListBox.Top       := pnlEdit.Height;//editNome.Height + editNome.Top + 10;
+  end;
+end;
+
+procedure TvendaForm.DBGrid1KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if not cdsItens.IsEmpty then
+  begin
+    // Verifica se a tecla pressionada foi Delete
+    if Key = VK_DELETE then
+    begin
+      if MessageDlg('Deseja excluir o item?', mtConfirmation,
+         [mbYes, mbNo], 0) = mrYes then
+      begin
+        cdsItens.Delete;
+        carregaTotais;
+      end;
+    end;
+
+    // Verifica se a tecla pressionada foi Enter
+    if Key = VK_RETURN then
+    begin
+      begin
+        cdsItens.Edit;
+
+        // Libera os campos "QUANT" e "VLR_UNIT" para edição
+        cdsItens.FieldByName('QUANTIDADE').ReadOnly := False;
+        cdsItens.FieldByName('VLR_UNIT').ReadOnly := False;
+
+        // Bloqueia outros campos
+        cdsItens.FieldByName('CODIGO').ReadOnly    := True;
+        cdsItens.FieldByName('NOME').ReadOnly      := True;
+        cdsItens.FieldByName('VLR_TOTAL').ReadOnly := True;
+
+        // Coloca o foco no campo "QUANTIDADE" para iniciar a edição
+        DBGrid1.SelectedField := cdsItens.FieldByName('QUANTIDADE');
+
+        // Anula a tecla.
+        Key := 0;
+      end;
+    end;
+  end;
+end;
+
+procedure TvendaForm.editCodigoClick(Sender: TObject);
+begin
+  editNome.SetFocus;
+end;
+
+procedure TvendaForm.editCodigoEnter(Sender: TObject);
+begin
+  editNome.SetFocus;
+end;
+
+procedure TvendaForm.editNomeChange(Sender: TObject);
+begin
+  if Trim(editNome.Text) = '' then
+  begin
+    if Assigned(FListBox) then FreeAndNil(FListBox);    
+    Exit;
+  end;
+  pesquisaProduto;
+end;
+
+procedure TvendaForm.editNomeEnter(Sender: TObject);
+begin
+  editNome.SelectAll;
+end;
+
+procedure TvendaForm.editNomeKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Key = VK_DOWN) and Assigned(FListBox) then FListBox.SetFocus;
+end;
 
 procedure TvendaForm.editQuantKeyPress(Sender: TObject; var Key: Char);
 begin
@@ -97,6 +247,17 @@ begin
   end;
 end;
 
+procedure TvendaForm.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = VK_F3 then
+  begin
+    if pesquisaCliForm.ModalResult = mrOk then
+
+  end;
+
+end;
+
 procedure TvendaForm.FormResize(Sender: TObject);
 begin
   editCodigo.Width := 69;
@@ -107,6 +268,8 @@ begin
   lblNome.Width    := (pnlEdit.Width - (69*3) - 110);
   lblQuant.Width   := 69;
   lblValor.Width   := 69;
+  if Assigned(FListBox) then
+  FListBox.Width   := editNome.Width;
 end;
 
 procedure TvendaForm.FormShow(Sender: TObject);
@@ -114,7 +277,7 @@ begin
   iniciaForm;
 end;
 
-procedure TvendaForm.Image4Click(Sender: TObject);
+procedure TvendaForm.insereProduto;
 begin
   with cdsItens, FieldDefs do
   begin
@@ -123,8 +286,36 @@ begin
     FieldByName('NOME').AsString        := editNome.Text;
     FieldByName('QUANTIDADE').AsFloat   := StrToFloat(editQuant.Text);
     FieldByName('VLR_UNIT').AsCurrency  := StrToFloat(editValor.Text);
-    FieldByName('VLR_TOTAL').AsCurrency := StrToFloat(editValor.Text) * StrToFloat(editQuant.Text);
     Post;
+  end;
+end;
+
+procedure TvendaForm.ListBoxKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+var Valores : TArray<String>;
+begin
+  if Key = VK_RETURN then
+  begin
+    if (FListBox.ItemIndex <> - 1) and (FListBox.Count > 0) then
+    begin
+      Valores         := FListBox.Items[FListBox.ItemIndex].Split([',']);
+      editCodigo.Text := Trim(Valores[0]);
+      editNome.Text   := Trim(Valores[1]);
+      editValor.Text  := Trim(Valores[2]).Replace('.',',',[rfReplaceAll,rfIgnoreCase]);
+      editQuant.Text  := '1';
+      editQuant.SetFocus;
+      editQuant.SelectAll;
+      if Assigned(FListBox) then FreeAndNil(FListBox)      
+    end;
+  end;
+end;
+
+procedure TvendaForm.imgClienteClick(Sender: TObject);
+begin
+  pesquisaCliForm.ShowModal;
+  if pesquisaCliForm.ModalResult = mrOk then
+  begin
+    lblCliente.Caption := Dm.FDQ_Cliente.FieldByName('CODIGO').AsString + '-' + Dm.FDQ_Cliente.FieldByName('NOME').AsString
   end;
 end;
 
@@ -146,18 +337,52 @@ end;
 procedure TvendaForm.iniciaForm;
 begin
   editCodigo.Text := '';
-  editNome.Text   := 'Pressione ENTER para pesquisar';
+  editNome.Text   := 'Digite aqui para pesquisar seu produto';
   editQuant.Text  := '';
   editValor.Text  := '';
   lblVlrTotal.Caption := 'R$ 0,00';
   lblCliente.Caption  := 'CONSUMIDOR';
   lblQntItens.Caption := 'QTD: 0';
   lblNumItens.Caption := 'N° ITENS: 0';
+  iniciaDataSet;
+end;
+
+procedure TvendaForm.pesquisaProduto;
+var
+  Valores: TArray<string>;
+  StringList : TStringList;
+  i : Integer;
+begin
+  StringList := TStringList.Create;
+  StringList := DmFun.pesquisaProdutos(editNome.Text);
+  if StringList.Count > 0 then
+  begin
+    criaListBox;
+    for i := 0 to StringList.Count - 1 do
+    begin
+      FListBox.Items.Add(StringList[i]);
+    end;
+  end;
 end;
 
 procedure TvendaForm.pnlCancelaClick(Sender: TObject);
 begin
   iniciaForm;
+end;
+
+procedure TvendaForm.pnlFinalizaClick(Sender: TObject);
+begin
+  if lblCliente.Caption = 'CONSUMIDOR' then
+  begin
+    ShowMessage('Venda sem cliente designado!');
+    Exit;
+  end;
+
+  if cdsItens.IsEmpty then
+  begin
+    ShowMessage('Nenhum produto registrado.');
+    Exit;
+  end;
 end;
 
 procedure TvendaForm.pnlFundoMouseEnter(Sender: TObject);
@@ -173,13 +398,15 @@ end;
 procedure TvendaForm.pnlMenuResize(Sender: TObject);
 begin
   editCodigo.Width := 69;
-  editNome.Width   := (pnlEdit.Width - (69*3) - 110);
+  editNome.Width   := (pnlEdit.Width - (69*3) - 150);
   editQuant.Width  := 69;
   editValor.Width  := 69;
   lblCod.Width     := 69;
-  lblNome.Width    := (pnlEdit.Width - (69*3) - 110);
+  lblNome.Width    := (pnlEdit.Width - (69*3) - 150);
   lblQuant.Width   := 69;
   lblValor.Width   := 69;
+  if Assigned(FListBox) then
+  FListBox.Width   := editNome.Width;
 end;
 
 procedure TvendaForm.pnlSairClick(Sender: TObject);
@@ -195,6 +422,27 @@ end;
 procedure TvendaForm.pnlSairMouseLeave(Sender: TObject);
 begin
   pnlSair.Color := $00292929;
+end;
+
+procedure TvendaForm.SpeedButton1Click(Sender: TObject);
+begin
+  if (Trim(editCodigo.Text) = '') or (Trim(editNome.Text) = '') then
+  begin
+    ShowMessage('Nenhum produto foi selecionado!');
+    Exit;
+  end;
+
+  if (Trim(editQuant.Text) = '') then
+  begin
+    ShowMessage('Quantidade não pode ser vazia!');
+    Exit;
+  end;
+
+  if cdsItens.State in [dsEdit] then
+  cdsItens.Post
+  else
+  insereProduto;
+  carregaTotais;
 end;
 
 end.

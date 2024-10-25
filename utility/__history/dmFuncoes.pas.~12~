@@ -1,0 +1,60 @@
+unit dmFuncoes;
+
+interface
+
+uses
+  System.SysUtils, FireDAC.Comp.Client, Generics.Collections, System.Classes,
+  FireDAC.UI.Intf, FireDAC.VCLUI.Wait, FireDAC.Stan.Intf, FireDAC.Comp.UI, FireDAC.DApt, Dialogs;
+
+type
+  TDmFun = class(TDataModule)
+    FDGUIxWaitCursor1: TFDGUIxWaitCursor;
+  function pesquisaProdutos(AString: String): TStringList;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DmFun: TDmFun;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+uses dmDatabase;
+
+{$R *.dfm}
+
+{ TDmFun }
+
+function TDmFun.pesquisaProdutos(AString: String): TStringList;
+var FString : TStringList;
+    SString : String;
+begin
+  FString := TStringList.Create;
+  with TFDQuery.Create(nil), SQL do
+  begin
+    Connection := Dm.FDC_MySQL;
+    Add('select * from tbprodutos');
+    Add('where descricao LIKE :desc');
+    ParamByName('desc').AsString := '%'+AString;
+    Open;
+    if not IsEmpty then
+    begin
+      First;
+      while not Eof do
+      begin
+        SString := '';
+        SString := FieldByName('CODIGO').AsString + ',' + FieldByName('DESCRICAO').AsString + ',' +
+                   FieldByName('PRECO').AsString;
+        FString.Add(SString);
+        Next;
+      end;
+      Result := FString;
+    end;
+  end;
+end;
+
+end.
