@@ -1,0 +1,46 @@
+object pesquisaVendaForm: TpesquisaVendaForm
+  Left = 0
+  Top = 0
+  BorderStyle = bsNone
+  Caption = 'pesquisaVendaForm'
+  ClientHeight = 432
+  ClientWidth = 807
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 807
+    Height = 432
+    Align = alClient
+    Caption = 'Panel1'
+    Color = 8282113
+    ParentBackground = False
+    TabOrder = 0
+    ExplicitLeft = 312
+    ExplicitTop = 200
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+    object DBGrid1: TDBGrid
+      AlignWithMargins = True
+      Left = 4
+      Top = 4
+      Width = 799
+      Height = 424
+      Align = alClient
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+    end
+  end
+end

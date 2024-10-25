@@ -10,6 +10,7 @@ type
   TDmFun = class(TDataModule)
     FDGUIxWaitCursor1: TFDGUIxWaitCursor;
   function pesquisaProdutos(AString: String): TStringList;
+  function somenteNumeros(AString : String): String;
   private
     { Private declarations }
   public
@@ -44,7 +45,6 @@ begin
     FDQuery.SQL.Add('order by descricao');
     FDQuery.ParamByName('desc').AsString := AString + '%';
     FDQuery.Open;
-
     if not FDQuery.IsEmpty then
     begin
       FDQuery.First;
@@ -58,10 +58,28 @@ begin
         FDQuery.Next;
       end;
     end;
-
     Result := FString;
   finally
     FDQuery.Free;  // Libera o FDQuery
+  end;
+end;
+
+function TDmFun.somenteNumeros(AString: String): String;
+var vText : PChar;
+begin
+  vText := PChar(AString);
+  Result := '';
+
+  while (vText^ <> #0) do
+  begin
+    {$IFDEF UNICODE}
+    if CharInSet(vText^, ['0'..'9']) then
+    {$ELSE}
+    if vText^ in ['0'..'9'] then
+    {$ENDIF}
+      Result := Result + vText^;
+
+    Inc(vText);
   end;
 end;
 

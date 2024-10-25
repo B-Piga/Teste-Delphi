@@ -39,4 +39,19 @@ object Dm: TDm
     Left = 520
     Top = 152
   end
+  object DS_Venda: TDataSource
+    DataSet = FDQ_Venda
+    Left = 520
+    Top = 248
+  end
+  object FDQ_Venda: TFDQuery
+    Connection = FDC_MySQL
+    SQL.Strings = (
+      
+        'select a.codigo_pedido,b.nome, a.dt_emissao, a.vlr_total from tb' +
+        'pedidos a'
+      'left outer join tbclientes b on a.cod_cli = b.codigo')
+    Left = 520
+    Top = 200
+  end
 end

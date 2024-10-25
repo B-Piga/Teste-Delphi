@@ -269,6 +269,7 @@ object vendaForm: TvendaForm
             9DBEE5A742347901C42D40C8F57BCD01B1827E9B3306E009B15C662E63001E10
             3F507146013C20CE651C200544D7A0003820EA060D4021644BEF400B90BCBC0E
             FF053C8557292CE2EDDB0000000049454E44AE426082}
+          OnClick = imgPesquisaClick
           OnMouseEnter = pnlMenuMouseEnter
           ExplicitLeft = 1
           ExplicitTop = 1
@@ -816,7 +817,6 @@ object vendaForm: TvendaForm
           Font.Style = []
           ParentFont = False
           WordWrap = True
-          ExplicitTop = 30
           ExplicitWidth = 107
         end
       end

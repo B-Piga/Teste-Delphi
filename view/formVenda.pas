@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
   Vcl.Imaging.pngimage, Data.DB, Vcl.Grids, Vcl.DBGrids, Datasnap.DBClient,
-  Vcl.Buttons, FireDAC.Comp.Client, FireDAC.DApt;
+  Vcl.Buttons, FireDAC.Comp.Client, FireDAC.DApt, vendaController;
 
 type
   TvendaForm = class(TForm)
@@ -79,12 +79,15 @@ type
     procedure pnlFinalizaClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure imgClienteClick(Sender: TObject);
+    procedure imgPesquisaClick(Sender: TObject);
   private
     { Private declarations }
     FListBox : TListBox;
+    FVenda   : TVendaController;
     procedure iniciaDataSet;
     procedure iniciaForm;
-    procedure insereProduto;
+    procedure insereProduto; overload;
+    procedure insereProduto(Codigo : Integer ; Nome : String ; Quant : Extended ; Vlr_Unit : Currency); overload;
     procedure carregaTotais;
     procedure pesquisaProduto;
     procedure criaListBox;
@@ -99,7 +102,7 @@ implementation
 
 {$R *.dfm}
 
-uses dmFuncoes, formPesquisaCliente, dmDatabase, vendaController;
+uses dmFuncoes, formPesquisaCliente, dmDatabase, formPesquisaVenda;
 
 procedure TvendaForm.carregaTotais;
 var iNumItens : Integer;
@@ -141,7 +144,7 @@ begin
     cdsItens.EnableControls;  // Restaura as atualizações visuais
     lblQntItens.Caption := 'QTD: ' + eQuant.ToString;
     lblNumItens.Caption := 'N° Itens: ' + iNumItens.ToString;
-    lblVlrTotal.Caption := CurrToStr(cTotal);
+    lblVlrTotal.Caption := 'R$ '+CurrToStr(cTotal);
   end;
 end;
 
@@ -180,19 +183,15 @@ begin
     begin
       begin
         cdsItens.Edit;
-
         // Libera os campos "QUANT" e "VLR_UNIT" para edição
         cdsItens.FieldByName('QUANTIDADE').ReadOnly := False;
         cdsItens.FieldByName('VLR_UNIT').ReadOnly := False;
-
         // Bloqueia outros campos
         cdsItens.FieldByName('CODIGO').ReadOnly    := True;
         cdsItens.FieldByName('NOME').ReadOnly      := True;
         cdsItens.FieldByName('VLR_TOTAL').ReadOnly := True;
-
         // Coloca o foco no campo "QUANTIDADE" para iniciar a edição
         DBGrid1.SelectedField := cdsItens.FieldByName('QUANTIDADE');
-
         // Anula a tecla.
         Key := 0;
       end;
@@ -319,6 +318,22 @@ begin
   end;
 end;
 
+procedure TvendaForm.imgPesquisaClick(Sender: TObject);
+var Query : TFDQuery;
+begin
+  Dm.FDQ_Venda.Close;
+  Dm.FDQ_Venda.Open;
+  pesquisaVendaForm.ShowModal;
+  if pesquisaVendaForm.ModalResult = mrOk then
+  begin
+    if Assigned(FVenda) then FreeAndNil(FVenda);
+    FVenda                      := TVendaController.Create;
+    FVenda.Venda.Numero         := Dm.FDQ_Venda.FieldByName('CODIGO_PEDIDO').AsInteger;
+    FVenda.Venda.Cliente.Codigo := Dm.FDQ_Venda.FieldByName('COD_CLI').AsInteger;
+    cdsItens.EmptyDataSet;
+  end;
+end;
+
 procedure TvendaForm.iniciaDataSet;
 begin
   with cdsItens, FieldDefs do
@@ -336,6 +351,8 @@ end;
 
 procedure TvendaForm.iniciaForm;
 begin
+  if Assigned(FVenda) then FreeAndNil(FVenda);
+  FVenda          := TVendaController.Create;
   editCodigo.Text := '';
   editNome.Text   := 'Digite aqui para pesquisar seu produto';
   editQuant.Text  := '';
@@ -345,6 +362,20 @@ begin
   lblQntItens.Caption := 'QTD: 0';
   lblNumItens.Caption := 'N° ITENS: 0';
   iniciaDataSet;
+end;
+
+procedure TvendaForm.insereProduto(Codigo: Integer; Nome: String;
+  Quant: Extended; Vlr_Unit: Currency);
+begin
+  with cdsItens, FieldDefs do
+  begin
+    Append;
+    FieldByName('CODIGO').AsInteger     := Codigo;
+    FieldByName('NOME').AsString        := Nome;
+    FieldByName('QUANTIDADE').AsFloat   := Quant;
+    FieldByName('VLR_UNIT').AsCurrency  := Vlr_Unit;
+    Post;
+  end;
 end;
 
 procedure TvendaForm.pesquisaProduto;
@@ -384,7 +415,27 @@ begin
     Exit;
   end;
 
-  vendaController.TVendaController.
+  cdsItens.First;
+  while not cdsItens.Eof do
+  begin
+    with cdsItens do
+    begin
+      FVenda.AdicionarProduto(FieldByName('CODIGO').AsInteger,
+                              FieldByName('VLR_UNIT').AsCurrency,
+                              FieldByName('NOME').AsString,
+                              FieldByName('QUANTIDADE').AsExtended);
+    end;
+    cdsItens.Next;
+  end;
+
+  FVenda.Venda.Cliente.Codigo := StrToInt(DmFun.somenteNumeros(lblCliente.Caption));
+
+  if FVenda.Venda.Numero = 0 then
+  FVenda.FinalizarVenda
+  else
+  FVenda.FinalizarVenda;
+
+  ShowMessage('Venda Finalizada!');
 end;
 
 procedure TvendaForm.pnlFundoMouseEnter(Sender: TObject);

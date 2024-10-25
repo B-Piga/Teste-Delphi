@@ -22,6 +22,7 @@ type
     property Data: TDateTime read FData write FData;
     property Total: Currency read FTotal;
     property Produtos: TList<TProduto> read FProdutos write FProdutos;
+    property Cliente: TCliente read FCliente write FCliente;
   end;
 
 implementation
@@ -29,11 +30,13 @@ implementation
 constructor TVenda.Create;
 begin
   FProdutos := TList<TProduto>.Create;
+  FCliente  := TCliente.Create;
 end;
 
 destructor TVenda.Destroy;
 begin
   FProdutos.Free;
+  FCliente.Free;
   inherited;
 end;
 
@@ -49,7 +52,7 @@ var
 begin
   FTotal := 0;
   for Produto in FProdutos do
-    FTotal := FTotal + Produto.Preco;
+    FTotal := FTotal + (Produto.Preco * Produto.Quantidade);
 end;
 
 end.

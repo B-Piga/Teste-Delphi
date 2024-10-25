@@ -14,7 +14,8 @@ type
     editNome: TEdit;
     Label1: TLabel;
     procedure editNomeChange(Sender: TObject);
-    procedure DBGrid1CellClick(Column: TColumn);
+    procedure FormShow(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -30,7 +31,7 @@ implementation
 
 uses dmDatabase;
 
-procedure TpesquisaCliForm.DBGrid1CellClick(Column: TColumn);
+procedure TpesquisaCliForm.DBGrid1DblClick(Sender: TObject);
 begin
   ModalResult := mrOk;
 end;
@@ -46,6 +47,11 @@ begin
     ParamByName('NOME').AsString := editNome.Text + '%';
     Open;
   end;
+end;
+
+procedure TpesquisaCliForm.FormShow(Sender: TObject);
+begin
+  editNome.SetFocus;
 end;
 
 end.

@@ -18,6 +18,8 @@ type
     FDT_MySQL: TFDTransaction;
     FDQ_Cliente: TFDQuery;
     DS_Cliente: TDataSource;
+    DS_Venda: TDataSource;
+    FDQ_Venda: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
