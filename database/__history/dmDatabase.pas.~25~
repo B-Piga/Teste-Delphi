@@ -66,7 +66,8 @@ begin
       Params.Values['Password']     := Password;
       Params.Values['CharacterSet'] := 'utf8mb4';
       if LibraryPath <> '' then
-      FDPhysMySQLDriverLink1.VendorLib := LibraryPath;
+      Params.Values['VendorLib'] := LibraryPath;
+      // Tentando conectar
       Connected := True;
     end;
   except
