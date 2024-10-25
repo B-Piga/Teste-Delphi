@@ -13,6 +13,7 @@ object vendaForm: TvendaForm
   Font.Style = []
   OldCreateOrder = False
   WindowState = wsMaximized
+  OnKeyDown = FormKeyDown
   OnResize = FormResize
   OnShow = FormShow
   PixelsPerInch = 96
@@ -195,6 +196,7 @@ object vendaForm: TvendaForm
             A681B08C4E3B0A88558F304CD5C5E4869300DA14B0D57163AF71537E4F24DB16
             04F95FC093315E4C62B97C94D2E5DBC59C8C562B367F4E8BCCFE020B1CCD2175
             3597E90000000049454E44AE426082}
+          OnClick = imgDeletarVendaClick
           OnMouseEnter = pnlMenuMouseEnter
           ExplicitLeft = 1
           ExplicitTop = 1
@@ -268,6 +270,7 @@ object vendaForm: TvendaForm
             9DBEE5A742347901C42D40C8F57BCD01B1827E9B3306E009B15C662E63001E10
             3F507146013C20CE651C200544D7A0003820EA060D4021644BEF400B90BCBC0E
             FF053C8557292CE2EDDB0000000049454E44AE426082}
+          OnClick = imgPesquisaClick
           OnMouseEnter = pnlMenuMouseEnter
           ExplicitLeft = 1
           ExplicitTop = 1
@@ -545,6 +548,7 @@ object vendaForm: TvendaForm
             Text = 'Digite aqui para pesquisar seu produto'
             OnChange = editNomeChange
             OnEnter = editNomeEnter
+            OnKeyDown = editNomeKeyDown
             ExplicitHeight = 29
           end
           object editQuant: TEdit
@@ -602,12 +606,19 @@ object vendaForm: TvendaForm
           Height = 153
           Align = alClient
           DataSource = dsItens
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
+          TitleFont.Height = -13
+          TitleFont.Name = 'Segoe UI Semibold'
           TitleFont.Style = []
+          OnKeyDown = DBGrid1KeyDown
         end
       end
     end
@@ -643,6 +654,7 @@ object vendaForm: TvendaForm
       ParentBackground = False
       ParentFont = False
       TabOrder = 0
+      OnClick = pnlFinalizaClick
       object Label1: TLabel
         Left = 0
         Top = 0
@@ -779,6 +791,7 @@ object vendaForm: TvendaForm
           7AA194CB5CA613B018877FFFBD65B5C37A673C113F2F1E8F37C613090F4F249C
           1AD7AC9AC6F53EB6A2304D614A8CA96AC8A2AA3E55B50C58AC963FE743B177B7
           5E7081A9B5F87F62FCFF0616B447ED0000000049454E44AE426082}
+        OnClick = imgClienteClick
         ExplicitLeft = -51
         ExplicitTop = 3
       end
@@ -790,26 +803,10 @@ object vendaForm: TvendaForm
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        object Label3: TLabel
-          AlignWithMargins = True
-          Left = 3
-          Top = 3
-          Width = 261
-          Height = 21
-          Align = alTop
-          Caption = '[F3] Cliente'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
-          Font.Height = -16
-          Font.Name = 'Segoe UI Semibold'
-          Font.Style = []
-          ParentFont = False
-          ExplicitWidth = 82
-        end
         object lblCliente: TLabel
           AlignWithMargins = True
           Left = 3
-          Top = 30
+          Top = 3
           Width = 261
           Height = 21
           Align = alTop

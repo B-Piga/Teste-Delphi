@@ -80,6 +80,7 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure imgClienteClick(Sender: TObject);
     procedure imgPesquisaClick(Sender: TObject);
+    procedure imgDeletarVendaClick(Sender: TObject);
   private
     { Private declarations }
     FListBox : TListBox;
@@ -127,6 +128,7 @@ begin
   cdsItens.DisableControls;  // Evita atualizações visuais durante a iteração
   try
     cdsItens.First;  // Posiciona no primeiro registro
+    cdsItens.FieldByName('VLR_TOTAL').ReadOnly := False;
     while not cdsItens.Eof do
     begin
       with cdsItens do
@@ -318,6 +320,18 @@ begin
   end;
 end;
 
+procedure TvendaForm.imgDeletarVendaClick(Sender: TObject);
+begin
+  if FVenda.Venda.Numero = 0 then
+  begin
+    ShowMessage('Venda não finalizada!');
+    Exit;
+  end;
+  if MessageDlg('Deseja excluir o item?', mtConfirmation,
+     [mbYes, mbNo], 0) = mrYes then FVenda.ExcluirVenda;
+
+end;
+
 procedure TvendaForm.imgPesquisaClick(Sender: TObject);
 var Query : TFDQuery;
 begin
@@ -363,11 +377,11 @@ begin
   with cdsItens, FieldDefs do
   begin
     Clear;
-    Add('CODIGO', ftInteger);
-    Add('NOME', ftString, 100);
+    Add('CODIGO',     ftInteger);
+    Add('NOME',       ftString, 100);
     Add('QUANTIDADE', ftFloat);
-    Add('VLR_UNIT', ftCurrency);
-    Add('VLR_TOTAL', ftCurrency);
+    Add('VLR_UNIT',   ftCurrency);
+    Add('VLR_TOTAL',  ftCurrency);
     if not Active then    
     CreateDataSet;
   end;
@@ -382,10 +396,12 @@ begin
   editNome.Text   := 'Digite aqui para pesquisar seu produto';
   editQuant.Text  := '';
   editValor.Text  := '';
+
   lblVlrTotal.Caption := 'R$ 0,00';
   lblCliente.Caption  := 'CONSUMIDOR';
   lblQntItens.Caption := 'QTD: 0';
   lblNumItens.Caption := 'N° ITENS: 0';
+
   iniciaDataSet;
   editNome.SetFocus;
 end;
@@ -459,7 +475,7 @@ begin
   if FVenda.Venda.Numero = 0 then
   FVenda.FinalizarVenda
   else
-  FVenda.FinalizarVenda;
+  FVenda.AlterarVenda;
 
   ShowMessage('Venda Finalizada!');
   iniciaForm;
@@ -524,12 +540,12 @@ begin
 
     insereProduto;
   end;
-
-  if cdsItens.State in [dsEdit] then
-  cdsItens.Post
-  else
-
   carregaTotais;
+  editCodigo.Text := '';
+  editNome.Text   := 'Digite aqui para pesquisar seu produto';
+  editQuant.Text  := '';
+  editValor.Text  := '';
+  editNome.SetFocus;
 end;
 
 end.

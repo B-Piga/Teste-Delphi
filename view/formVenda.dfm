@@ -196,6 +196,7 @@ object vendaForm: TvendaForm
             A681B08C4E3B0A88558F304CD5C5E4869300DA14B0D57163AF71537E4F24DB16
             04F95FC093315E4C62B97C94D2E5DBC59C8C562B367F4E8BCCFE020B1CCD2175
             3597E90000000049454E44AE426082}
+          OnClick = imgDeletarVendaClick
           OnMouseEnter = pnlMenuMouseEnter
           ExplicitLeft = 1
           ExplicitTop = 1
@@ -217,6 +218,7 @@ object vendaForm: TvendaForm
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
+          OnClick = imgDeletarVendaClick
           OnMouseEnter = pnlMenuMouseEnter
           ExplicitWidth = 106
           ExplicitHeight = 17
@@ -291,6 +293,7 @@ object vendaForm: TvendaForm
           Font.Style = []
           ParentFont = False
           Layout = tlCenter
+          OnClick = imgPesquisaClick
           OnMouseEnter = pnlMenuMouseEnter
           ExplicitWidth = 82
           ExplicitHeight = 17

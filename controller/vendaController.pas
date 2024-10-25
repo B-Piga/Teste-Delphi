@@ -19,6 +19,7 @@ type
                                Quantidade: Extended);
     procedure FinalizarVenda;
     procedure AlterarVenda;
+    procedure ExcluirVenda;
     function ItensDaVenda: TFDQuery;
     property Venda: TVenda read FVenda;
   end;
@@ -89,6 +90,44 @@ destructor TVendaController.Destroy;
 begin
   FVenda.Free;
   inherited;
+end;
+
+procedure TVendaController.ExcluirVenda;
+var Query : TFDQuery;
+    Produto : TProduto;
+begin
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := dm.FDC_MySQL;
+
+    Dm.FDC_MySQL.StartTransaction;
+    try
+      with Query, SQL do
+      begin
+        // Deleta os produtos
+        Close;
+        Clear;
+        Add('DELETE FROM tbItensPedidos where CODIGO_PEDIDO = :COD');
+        ParamByName('COD').Value := FVenda.Numero;
+        ExecSQL;
+
+        Close;
+        Clear;
+        Add('DELETE FROM tbPedidos WHERE CODIGO_PEDIDO = :COD');
+        ParamByName('COD').Value := FVenda.Numero;
+        ExecSQL;
+        Dm.FDC_MySQL.Commit;
+      end;
+    except
+      on E: Exception do
+      begin
+        Dm.FDC_MySQL.Rollback;
+        raise Exception.Create('Erro ao excluir a venda: ' + E.Message);
+      end;
+    end;
+  finally
+    Query.Free;
+  end;
 end;
 
 procedure TVendaController.IniciarVenda;

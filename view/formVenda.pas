@@ -80,6 +80,7 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure imgClienteClick(Sender: TObject);
     procedure imgPesquisaClick(Sender: TObject);
+    procedure imgDeletarVendaClick(Sender: TObject);
   private
     { Private declarations }
     FListBox : TListBox;
@@ -317,6 +318,18 @@ begin
   begin
     lblCliente.Caption := Dm.FDQ_Cliente.FieldByName('CODIGO').AsString + '-' + Dm.FDQ_Cliente.FieldByName('NOME').AsString
   end;
+end;
+
+procedure TvendaForm.imgDeletarVendaClick(Sender: TObject);
+begin
+  if FVenda.Venda.Numero = 0 then
+  begin
+    ShowMessage('Venda não finalizada!');
+    Exit;
+  end;
+  if MessageDlg('Deseja excluir a venda?', mtConfirmation,
+     [mbYes, mbNo], 0) = mrYes then FVenda.ExcluirVenda;
+  iniciaForm;
 end;
 
 procedure TvendaForm.imgPesquisaClick(Sender: TObject);

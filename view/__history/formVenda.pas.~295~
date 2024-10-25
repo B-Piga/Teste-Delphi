@@ -127,6 +127,7 @@ begin
   cdsItens.DisableControls;  // Evita atualizações visuais durante a iteração
   try
     cdsItens.First;  // Posiciona no primeiro registro
+    cdsItens.FieldByName('VLR_TOTAL').ReadOnly := False;
     while not cdsItens.Eof do
     begin
       with cdsItens do
@@ -330,6 +331,7 @@ begin
     FVenda                      := TVendaController.Create;
     FVenda.Venda.Numero         := Dm.FDQ_Venda.FieldByName('CODIGO_PEDIDO').AsInteger;
     FVenda.Venda.Cliente.Codigo := Dm.FDQ_Venda.FieldByName('COD_CLI').AsInteger;
+    lblCliente.Caption          := Dm.FDQ_Venda.FieldByName('COD_CLI').AsString + '-' + Dm.FDQ_Venda.FieldByName('NOME').AsString;
     if not cdsItens.IsEmpty then    
     cdsItens.EmptyDataSet;
     Query := TFDQuery.Create(nil);
@@ -362,11 +364,11 @@ begin
   with cdsItens, FieldDefs do
   begin
     Clear;
-    Add('CODIGO', ftInteger);
-    Add('NOME', ftString, 100);
+    Add('CODIGO',     ftInteger);
+    Add('NOME',       ftString, 100);
     Add('QUANTIDADE', ftFloat);
-    Add('VLR_UNIT', ftCurrency);
-    Add('VLR_TOTAL', ftCurrency);
+    Add('VLR_UNIT',   ftCurrency);
+    Add('VLR_TOTAL',  ftCurrency);
     if not Active then    
     CreateDataSet;
   end;
@@ -381,10 +383,12 @@ begin
   editNome.Text   := 'Digite aqui para pesquisar seu produto';
   editQuant.Text  := '';
   editValor.Text  := '';
+
   lblVlrTotal.Caption := 'R$ 0,00';
   lblCliente.Caption  := 'CONSUMIDOR';
   lblQntItens.Caption := 'QTD: 0';
   lblNumItens.Caption := 'N° ITENS: 0';
+
   iniciaDataSet;
   editNome.SetFocus;
 end;
@@ -458,7 +462,7 @@ begin
   if FVenda.Venda.Numero = 0 then
   FVenda.FinalizarVenda
   else
-  FVenda.FinalizarVenda;
+  FVenda.AlterarVenda;
 
   ShowMessage('Venda Finalizada!');
   iniciaForm;
@@ -505,23 +509,30 @@ end;
 
 procedure TvendaForm.SpeedButton1Click(Sender: TObject);
 begin
-  if (Trim(editCodigo.Text) = '') or (Trim(editNome.Text) = '') then
-  begin
-    ShowMessage('Nenhum produto foi selecionado!');
-    Exit;
-  end;
-
-  if (Trim(editQuant.Text) = '') then
-  begin
-    ShowMessage('Quantidade não pode ser vazia!');
-    Exit;
-  end;
-
   if cdsItens.State in [dsEdit] then
   cdsItens.Post
   else
-  insereProduto;
+  begin
+    if (Trim(editCodigo.Text) = '') or (Trim(editNome.Text) = '') then
+    begin
+      ShowMessage('Nenhum produto foi selecionado!');
+      Exit;
+    end;
+
+    if (Trim(editQuant.Text) = '') then
+    begin
+      ShowMessage('Quantidade não pode ser vazia!');
+      Exit;
+    end;
+
+    insereProduto;
+  end;
   carregaTotais;
+  editCodigo.Text := '';
+  editNome.Text   := 'Digite aqui para pesquisar seu produto';
+  editQuant.Text  := '';
+  editValor.Text  := '';
+  editNome.SetFocus;
 end;
 
 end.

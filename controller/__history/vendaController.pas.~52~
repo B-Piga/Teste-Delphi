@@ -19,6 +19,7 @@ type
                                Quantidade: Extended);
     procedure FinalizarVenda;
     procedure AlterarVenda;
+    procedure ExcluirVenda;
     function ItensDaVenda: TFDQuery;
     property Venda: TVenda read FVenda;
   end;
@@ -39,7 +40,7 @@ begin
     try
       with Query, SQL do
       begin
-        Add('UPDATE tbPedido SET COD_CLI = :COD_CLI, VLR_TOTAL = :VLR_TOTAL');
+        Add('UPDATE tbPedidos SET COD_CLI = :COD_CLI, VLR_TOTAL = :VLR_TOTAL');
         Add('WHERE CODIGO_PEDIDO = :COD');
         ParamByName('COD').Value := FVenda.Numero;
         ParamByName('COD_CLI').Value := FVenda.Cliente.Codigo;
@@ -51,12 +52,13 @@ begin
         Clear;
         Add('DELETE FROM tbItensPedidos where CODIGO_PEDIDO = :COD');
         ParamByName('COD').Value := FVenda.Numero;
+        ExecSQL;
 
         for Produto in Venda.Produtos do
         begin
           Close;
           Clear;
-          Add('INSERT INTO tbItensPedido (CODIGO_PEDIDO, COD_PROD, QUANT, VLR_UNIT, VLR_TOTAL)');
+          Add('INSERT INTO tbItensPedidos (CODIGO_PEDIDO, COD_PRODUTO, QUANT, VLR_UNIT, VLR_TOTAL)');
           Add('VALUES (:CODIGO_PEDIDO, :COD_PROD, :QUANT, :VLR_UNIT, :VLR_TOTAL)');
           ParamByName('CODIGO_PEDIDO').Value := FVenda.Numero;
           ParamByName('COD_PROD').Value      := Produto.Codigo;
@@ -90,6 +92,42 @@ begin
   inherited;
 end;
 
+procedure TVendaController.ExcluirVenda;
+var Query : TFDQuery;
+    Produto : TProduto;
+begin
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := dm.FDC_MySQL;
+
+    Dm.FDC_MySQL.StartTransaction;
+    try
+      with Query, SQL do
+      begin
+        // Deleta os produtos
+        Close;
+        Clear;
+        Add('DELETE FROM tbItensPedidos where CODIGO_PEDIDO = :COD');
+        ParamByName('COD').Value := FVenda.Numero;
+        ExecSQL;
+
+        Add('DELETE FROM tbPedidos WHERE CODIGO_PEDIDO = :COD');
+        ParamByName('COD').Value := FVenda.Numero;
+        ExecSQL;
+        Dm.FDC_MySQL.Commit;
+      end;
+    except
+      on E: Exception do
+      begin
+        Dm.FDC_MySQL.Rollback;
+        raise Exception.Create('Erro ao excluir a venda: ' + E.Message);
+      end;
+    end;
+  finally
+    Query.Free;
+  end;
+end;
+
 procedure TVendaController.IniciarVenda;
 begin
   FVenda.Data := Now;
@@ -103,14 +141,14 @@ begin
     Query.Connection := Dm.FDC_MySQL;
     with Query, SQL do
     begin
-      Add('select a.codigo, a.descricao, b.vlr_unit from tbItensPedidos b');
-      Add('left outer join tbProdutos on a.codigo = b.cod_produto');
+      Add('select a.codigo, a.descricao, b.quant, b.vlr_unit from tbItensPedidos b');
+      Add('left outer join tbProdutos a on a.codigo = b.cod_produto');
       Add('where b.codigo_pedido = :cod');
       ParamByName('cod').AsInteger := FVenda.Numero;
+      Open;
     end;
   finally
     Result := Query;
-    Query.Free;
   end;
 end;
 
